@@ -28,6 +28,42 @@
       var(--paper);
     background-size: 30px 30px;
   }
+  body.style-rounded-memphis {
+    --paper: #fff8e1;
+    --paper-soft: #fffdf1;
+    --ink: #1a1a1a;
+    --muted: #403a34;
+    --tomato: #ff2d78;
+    --mustard: #ffe500;
+    --mint: #00e676;
+    --green: #c6ff00;
+    --line: 4px solid var(--ink);
+    --shadow: 7px 7px 0 var(--ink);
+    font-family: "Trebuchet MS", "Microsoft YaHei", "PingFang SC", Arial, sans-serif;
+    background:
+      linear-gradient(rgba(26,26,26,.045) 1.5px, transparent 1.5px),
+      linear-gradient(90deg, rgba(26,26,26,.045) 1.5px, transparent 1.5px),
+      #fff8e1;
+    background-size: 60px 60px;
+  }
+  body.style-bold-memphis {
+    --paper: #f7f0e6;
+    --paper-soft: #fff7df;
+    --ink: #000;
+    --muted: #171717;
+    --tomato: #ff6b9d;
+    --mustard: #ffde17;
+    --mint: #00d4ff;
+    --green: #7bed7b;
+    --line: 6px solid var(--ink);
+    --shadow: 10px 10px 0 var(--ink);
+    font-family: Impact, "Arial Black", "Microsoft YaHei", "PingFang SC", sans-serif;
+    background:
+      linear-gradient(rgba(0,0,0,.06) 1px, transparent 1px),
+      linear-gradient(90deg, rgba(0,0,0,.06) 1px, transparent 1px),
+      #f7f0e6;
+    background-size: 60px 60px;
+  }
   .deck { width: 100vw; height: 100vh; display: grid; place-items: center; padding: 20px; }
   .slide {
     display: none;
@@ -45,16 +81,110 @@
     box-shadow: var(--shadow);
     padding: 46px 56px 42px;
   }
+  body.style-rounded-memphis .slide {
+    border-radius: 30px;
+    padding: 48px 58px 44px;
+  }
+  body.style-bold-memphis .slide {
+    border-radius: 10px;
+    box-shadow: 14px 14px 0 var(--ink);
+    padding: 48px 58px 44px;
+  }
+  body.style-rounded-memphis .slide::before,
+  body.style-rounded-memphis .slide::after,
+  body.style-bold-memphis .slide::before,
+  body.style-bold-memphis .slide::after {
+    content: "";
+    position: absolute;
+    pointer-events: none;
+    z-index: 0;
+  }
+  body.style-rounded-memphis .slide::before {
+    width: 76px;
+    height: 76px;
+    right: 36px;
+    top: 34px;
+    border: 4px solid var(--ink);
+    border-radius: 50%;
+    background: #ff2d78;
+    box-shadow: 6px 6px 0 var(--ink);
+  }
+  body.style-rounded-memphis .slide::after {
+    width: 54px;
+    height: 54px;
+    left: 42px;
+    bottom: 48px;
+    border: 4px solid var(--ink);
+    background: #00d4ff;
+    transform: rotate(45deg);
+    box-shadow: 5px 5px 0 var(--ink);
+  }
+  body.style-bold-memphis .slide::before {
+    width: 92px;
+    height: 92px;
+    right: 34px;
+    top: 30px;
+    background: #ffde17;
+    clip-path: polygon(50% 0%, 61% 35%, 98% 35%, 68% 57%, 79% 91%, 50% 70%, 21% 91%, 32% 57%, 2% 35%, 39% 35%);
+    filter: drop-shadow(6px 6px 0 #000);
+  }
+  body.style-bold-memphis .slide::after {
+    left: 36px;
+    bottom: 48px;
+    width: 120px;
+    height: 26px;
+    border: 5px solid #000;
+    background: repeating-linear-gradient(90deg, #000 0 10px, transparent 10px 20px);
+    transform: rotate(-8deg);
+  }
   .slide.active { display: block; }
   .pin { position: absolute; left: 28px; top: 20px; transform: rotate(-2deg); padding: 7px 14px; border: 3px solid var(--ink); border-radius: 999px; background: var(--mustard); font-weight: 950; }
   .mark { display: inline-flex; padding: 8px 14px; border: 3px solid var(--ink); border-radius: 999px; background: var(--mint); font-weight: 950; }
   h1, h2, p { margin: 0; }
   h2 { margin-top: 28px; font-size: 56px; line-height: 1.08; }
+  body.style-rounded-memphis h2 {
+    font-size: 60px;
+    line-height: .98;
+    font-weight: 950;
+  }
+  body.style-rounded-memphis .accent {
+    display: inline-block;
+    padding: 0 .16em;
+    color: var(--ink);
+    background: var(--mustard);
+    border: 3px solid var(--ink);
+    border-radius: 12px;
+    transform: rotate(-1deg);
+  }
+  body.style-bold-memphis h2 {
+    font-size: 64px;
+    line-height: .94;
+    text-transform: uppercase;
+    color: #fff;
+    -webkit-text-stroke: 2px #000;
+    text-shadow: 5px 5px 0 #000, 9px 9px 0 #ffde17;
+  }
+  body.style-bold-memphis .accent {
+    color: #ffde17;
+  }
   .lead { margin-top: 18px; color: var(--muted); font-size: 25px; line-height: 1.42; font-weight: 750; }
   .accent { color: var(--tomato); }
   .layout { height: 100%; display: grid; grid-template-columns: 1fr 1fr; gap: 36px; align-items: center; }
   .layout.image-step { grid-template-columns: minmax(460px, .9fr) minmax(560px, 1.1fr); }
   .shot { position: relative; border: var(--line); border-radius: 20px; background: #fff; box-shadow: 8px 8px 0 var(--ink); padding: 10px; cursor: zoom-in; }
+  body.style-rounded-memphis .shot {
+    border-radius: 28px;
+    padding: 12px;
+    transform: rotate(1.5deg);
+    background: #fff;
+    box-shadow: 9px 9px 0 var(--ink);
+  }
+  body.style-bold-memphis .shot {
+    border-radius: 8px;
+    padding: 12px;
+    transform: rotate(-1deg);
+    box-shadow: 12px 12px 0 var(--ink);
+  }
   .shot img { display: block; width: 100%; height: auto; max-height: 600px; object-fit: contain; border: 3px solid var(--ink); border-radius: 13px; background: #f2f2f2; }
   .caption { position: absolute; left: 24px; bottom: -15px; padding: 8px 13px; border: 3px solid var(--ink); border-radius: 12px; background: var(--tomato); color: white; font-weight: 950; }
   .stepper { display: grid; gap: 12px; margin-top: 20px; }
@@ -63,6 +193,16 @@
   .step-badge { display: grid; place-items: center; width: 34px; height: 34px; border: 3px solid var(--ink); border-radius: 50%; background: var(--tomato); color: white; font-weight: 950; }
   .step-row b { display: block; font-size: 22px; line-height: 1.2; }
   .step-row p { margin: 5px 0 0; color: var(--muted); font-size: 17px; line-height: 1.35; font-weight: 700; }
+  body.style-rounded-memphis .step-row {
+    border-width: 4px;
+    border-radius: 22px;
+    box-shadow: 6px 6px 0 var(--ink);
+  }
+  body.style-bold-memphis .step-row {
+    border-width: 5px;
+    border-radius: 6px;
+    box-shadow: 7px 7px 0 var(--ink);
+  }
   .footer { position: absolute; left: 30px; right: 30px; bottom: 16px; display: flex; justify-content: space-between; color: var(--muted); font-size: 14px; font-weight: 900; }
   .progress { position: fixed; left: 24px; right: 24px; bottom: 9px; height: 10px; border: 2px solid var(--ink); border-radius: 999px; background: white; z-index: 20; }
   .progress span { display: block; width: 0; height: 100%; border-radius: 999px; background: var(--tomato); transition: width .16s ease; }
@@ -75,7 +215,8 @@
   .zoom-frame img { display: block; max-width: calc(94vw - 42px); max-height: calc(88vh - 42px); object-fit: contain; }
 </style>
 </head>
-<body>
+<!-- Change body class to style-rounded-memphis or style-bold-memphis when the user selects those styles. -->
+<body class="style-xiaoliang-lab">
 <main class="deck" id="deck"></main>
 <div class="progress"><span id="bar"></span></div>
 <div class="overview" id="overview"></div>

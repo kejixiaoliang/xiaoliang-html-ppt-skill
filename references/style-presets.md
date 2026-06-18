@@ -35,21 +35,35 @@ Avoid:
 
 Inspired by the MIMO/CHUNKY reference: rounded, candy-colored, chunky, playful, and friendly.
 
+This style must look obviously different from the default Xiaoliang lab style. It should feel like a toy-like creative playground, not just the default deck with brighter accents.
+
 Use:
 
-- Cream background with faint 60px grid.
+- Body class: `style-rounded-memphis`.
+- Cream background with a visible but light 60px grid.
 - Very bright accents: hot pink `#FF2D78`, yellow `#FFE500`, green `#00E676`, cyan `#00D4FF`, orange `#FF6D00`, lime `#C6FF00`.
-- Rounded chunky cards: 18-24px radius, 3.5-5px black borders, 5-10px offset shadows.
-- Friendly rounded fonts when available; otherwise use system rounded/sans fonts with heavy weights.
+- Rounded chunky cards: 22-30px radius, 4-5px black borders, 7-10px offset shadows.
+- Friendly rounded font stack. If web fonts are unavailable, use `Trebuchet MS`, `Microsoft YaHei`, `PingFang SC`, Arial, sans-serif.
+- Hero/title treatment: colored highlight blocks behind key words, rounded corners, small rotation. Avoid plain black text-only headings.
 - Bubble badges, pill labels, sticker buttons, playful star/circle/triangle/diamond shapes.
+- At least 1-2 visible candy geometric decorations per non-screenshot-heavy slide.
 - Soft bounce/drift/hover movement, but keep screenshot readability first.
 
 Slide adaptation:
 
 - Titles can use large chunky words with colored highlight blocks.
-- Cards should feel like soft toy blocks rather than sharp posters.
-- Image frames should be big, rounded, and cheerful.
-- Use stacked colorful blocks to explain workflows or feature lists.
+- Cards should feel like soft toy blocks rather than sharp posters: large radius, colorful top strips, friendly pill labels.
+- Image frames should be big, rounded, and cheerful; use rounded screenshot corners and a sticker caption.
+- Use stacked colorful blocks or vertical steppers to explain workflows.
+- Prefer 2-column layouts with generous breathing room. Avoid dense 4-column grids unless each card has very little text.
+
+Minimum visual checklist:
+
+- [ ] Background grid is 60px and visible.
+- [ ] Title has at least one candy highlight block.
+- [ ] Cards/shot frames are clearly rounded and chunky.
+- [ ] Palette includes at least pink/yellow/cyan/green on the slide or section.
+- [ ] Decorations are rounded/playful, not sharp poster marks.
 
 Avoid:
 
@@ -61,13 +75,16 @@ Avoid:
 
 Inspired by the DeepSeek reference: high-contrast, loud, poster-like, thick black borders, and strong Memphis shapes.
 
+This style must look like a loud poster deck. If it still feels like the default warm notebook, the style has failed.
+
 Use:
 
-- Warm beige grid background.
-- Thick black borders: 5-6px.
-- Heavy black shadows: 6-10px.
+- Body class: `style-bold-memphis`.
+- Warm beige grid background with stronger contrast than the default.
+- Thick black borders: 5-6px on primary cards, screenshots, buttons, and labels.
+- Heavy black shadows: 8-14px.
 - Bright poster colors: yellow `#ffde17`, pink `#ff6b9d`, cyan `#00d4ff`, green `#7bed7b`, orange `#ff8a5c`, purple `#b388ff`.
-- Big heavy headings, uppercase English labels where appropriate, strong text-shadow only for large decorative English/short title words.
+- Big heavy headings, uppercase English labels where appropriate, thick stroke or poster shadow on short headings.
 - Bold geometric decorations: stars, circles, triangles, diamonds, dot patterns, zigzags.
 - Pressable poster buttons/cards with slight rotation and tactile hover/active states.
 
@@ -75,14 +92,36 @@ Slide adaptation:
 
 - Use this when the deck needs momentum and punch.
 - Titles can be more slogan-like and high-impact.
-- Cards should be bigger and fewer per slide.
+- Cards should be bigger and fewer per slide: 2-3 strong blocks beat 6 small blocks.
 - Screenshots should sit in thick poster frames, often with red/yellow callout strips.
+- Use asymmetric composition: big screenshot or big title, not evenly polite cards everywhere.
+- Use dot/stripe/star decorations in corners, but keep dense screenshot centers clean.
+
+Minimum visual checklist:
+
+- [ ] Borders are visibly thicker than default.
+- [ ] Shadows are heavy and poster-like.
+- [ ] Title treatment uses stroke/shadow or high-impact color blocking.
+- [ ] There is at least one bold Memphis shape: star, dot pattern, stripe, triangle, or diamond.
+- [ ] Layout uses fewer, larger blocks rather than many small polite cards.
 
 Avoid:
 
 - Applying large text shadows to long Chinese paragraphs.
 - Making every slide equally loud; alternate high-impact slides with calmer screenshot walkthrough slides.
 - Overloading the frame with decorations around dense UI screenshots.
+
+## Template Implementation Notes
+
+The bundled `assets/template.html` includes body classes for these styles:
+
+```html
+<body class="style-xiaoliang-lab">
+<body class="style-rounded-memphis">
+<body class="style-bold-memphis">
+```
+
+When generating a deck, set the body class to the selected style and then adjust slide data/layouts. Do not merely mention a style in text; the CSS, card geometry, title treatment, and decorations must change visibly.
 
 ## Shared Style Requirements
 
