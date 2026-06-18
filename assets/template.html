@@ -3,7 +3,7 @@
 <head>
 <meta charset="utf-8">
 <meta name="viewport" content="width=device-width, initial-scale=1">
-<title>Xiaoliang HTML PPT</title>
+<title>Xiaoliang HTML PPT Skill Template</title>
 <style>
   :root {
     --paper: #fff4dc;
@@ -86,7 +86,7 @@ const zoomFrame = document.querySelector(".zoom-frame");
 let index = 0;
 let zoomCloseTimer = 0;
 
-deck.innerHTML = slides.map((s, i) => `<section class="slide" data-title="${s.title}"><div class="pin">${s.section}</div><div class="layout"><div><span class="mark">${s.tag}</span><h2>${s.headline}</h2><p class="lead">${s.lead}</p></div><div class="shot"><img src="${s.image}" alt=""><span class="caption">${s.caption}</span></div></div><div class="footer"><span>Xiaoliang HTML PPT</span><span>${i + 1} / ${slides.length}</span></div></section>`).join("");
+deck.innerHTML = slides.map((s, i) => `<section class="slide" data-title="${s.title}"><div class="pin">${s.section}</div><div class="layout"><div><span class="mark">${s.tag}</span><h2>${s.headline}</h2><p class="lead">${s.lead}</p></div><div class="shot"><img src="${s.image}" alt=""><span class="caption">${s.caption}</span></div></div><div class="footer"><span>Xiaoliang HTML PPT Skill</span><span>${i + 1} / ${slides.length}</span></div></section>`).join("");
 const slideEls = [...document.querySelectorAll(".slide")];
 
 function render() {

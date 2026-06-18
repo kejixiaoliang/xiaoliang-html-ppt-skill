@@ -1,8 +1,10 @@
-# Xiaoliang PPT Design System
+# Xiaoliang HTML PPT Design System
 
 ## Visual Intent
 
 The deck should feel like a creator's practical experiment notebook. It is warm, hand-drawn, clear, and slightly playful, but still dense enough for teaching. Avoid the feeling of a generic AI startup template.
+
+For selectable variants such as `圆润孟菲斯` and `粗黑孟菲斯`, first read `style-presets.md`, then adapt the tokens and components below to the selected style.
 
 ## Palette
 

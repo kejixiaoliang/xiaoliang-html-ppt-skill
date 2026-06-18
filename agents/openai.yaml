@@ -1,4 +1,4 @@
 interface:
-  display_name: "Xiaoliang PPT Skill"
-  short_description: "Warm hand-drawn HTML PPT decks."
-  default_prompt: "Use $xiaoliang-ppt-skill to turn my article and image assets into a screen-recording-friendly HTML PPT."
+  display_name: "Xiaoliang HTML PPT Skill"
+  short_description: "Creator-style HTML PPT decks."
+  default_prompt: "Use $xiaoliang-html-ppt-skill to turn my article and image assets into a screen-recording-friendly HTML PPT."

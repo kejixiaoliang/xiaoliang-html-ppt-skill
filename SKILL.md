@@ -1,9 +1,9 @@
 ---
-name: xiaoliang-ppt-skill
-description: Create screen-recording-friendly Xiaoliang-style HTML PPT decks from articles, outlines, pasted long-form Chinese content, and image asset folders. Use when the user wants a warm hand-drawn AI content lab presentation, creator teaching deck, GitHub/tutorial explainer, browser-recorded HTML slide deck, 16:9 clickable/keyboard/wheel slideshow, image-heavy lecture PPT, or asks to reuse the "科技小亮AGI / 小亮内容实验室" PPT style with hover-zoom screenshots and practical teaching density.
+name: xiaoliang-html-ppt-skill
+description: Create screen-recording-friendly Xiaoliang HTML PPT decks from articles, outlines, pasted long-form Chinese content, and image asset folders. Use when the user wants a warm hand-drawn AI content lab presentation, creator teaching deck, GitHub/tutorial explainer, browser-recorded HTML slide deck, 16:9 clickable/keyboard/wheel slideshow, image-heavy lecture PPT, or asks to use selectable styles such as "小亮手绘实验室", "圆润孟菲斯", or "粗黑孟菲斯" with hover-zoom screenshots and practical teaching density.
 ---
 
-# Xiaoliang PPT Skill
+# Xiaoliang HTML PPT Skill
 
 ## Purpose
 
@@ -30,13 +30,22 @@ This skill is not for generic corporate decks. It is for creator-led explainers 
    - Each slide should answer: "What does the audience learn here?"
    - Include enough visible text for comprehension, but keep it readable during recording.
 
-4. **Build a static single-file HTML deck unless the user asks otherwise.**
+4. **Choose the visual style.**
+   - If the user specifies a style, follow it exactly.
+   - If unspecified, default to `小亮手绘实验室`.
+   - Supported style triggers:
+     - `小亮手绘实验室`, `xiaoliang-lab`, `default`
+     - `圆润孟菲斯`, `rounded-memphis`, `candy-memphis`
+     - `粗黑孟菲斯`, `bold-memphis`, `poster-memphis`
+   - Read `references/style-presets.md` before implementing non-default styles.
+
+5. **Build a static single-file HTML deck unless the user asks otherwise.**
    - Keep the deck self-contained except for local image paths.
    - Use 16:9 slide stage.
    - Support keyboard navigation, wheel navigation, overview mode, fullscreen, and image hover zoom.
    - Use local relative image paths so the deck works inside the project folder.
 
-5. **Verify with a browser.**
+6. **Verify with a browser.**
    - Open with Chrome/Playwright or the available browser tool.
    - Check all images load.
    - Check all slides render in 16:9 without key text or images overflowing.
@@ -60,7 +69,7 @@ For long tutorials, insert recap slides after major sections only when they impr
 
 ## Visual Style
 
-Follow the Xiaoliang content lab aesthetic:
+Default to the Xiaoliang content lab aesthetic:
 
 - Warm paper backgrounds: cream, warm gray, pale yellow, light peach.
 - Subtle notebook/grid texture.
@@ -70,6 +79,8 @@ Follow the Xiaoliang content lab aesthetic:
 - Avoid blue-purple AI gradients, dark cyber dashboards, glassmorphism, and generic SaaS hero layouts.
 
 See `references/design-system.md` for concrete CSS tokens, layout rules, typography, and screenshot treatment.
+
+For selectable style variants, see `references/style-presets.md`. Use the names and aliases in that file so users can trigger styles by natural instructions.
 
 ## Interaction Requirements
 
@@ -103,15 +114,17 @@ When creating a new Xiaoliang-style HTML PPT from scratch:
 
 1. Read `references/authoring-workflow.md`.
 2. Read `references/design-system.md`.
-3. Read `references/interactions.md`.
-4. Copy or adapt `assets/template.html`.
-5. Replace the slide data and image paths.
-6. Verify before reporting done.
+3. If the user specifies a style, read `references/style-presets.md`.
+4. Read `references/interactions.md`.
+5. Copy or adapt `assets/template.html`.
+6. Replace the slide data and image paths.
+7. Verify before reporting done.
 
 ## Done Checklist
 
 - Source article has been fully represented at teaching depth.
 - All provided useful images were inspected and intentionally placed.
+- Requested style has been applied consistently, or default style was used intentionally.
 - Real UI screenshots are large enough to read or have hover zoom.
 - Deck is 16:9 and works by keyboard, wheel, overview, fullscreen, hash links.
 - Hover zoom is smooth and uses enlarged-card boundary behavior.
