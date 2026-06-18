@@ -53,9 +53,16 @@
   .lead { margin-top: 18px; color: var(--muted); font-size: 25px; line-height: 1.42; font-weight: 750; }
   .accent { color: var(--tomato); }
   .layout { height: 100%; display: grid; grid-template-columns: 1fr 1fr; gap: 36px; align-items: center; }
+  .layout.image-step { grid-template-columns: minmax(460px, .9fr) minmax(560px, 1.1fr); }
   .shot { position: relative; border: var(--line); border-radius: 20px; background: #fff; box-shadow: 8px 8px 0 var(--ink); padding: 10px; cursor: zoom-in; }
-  .shot img { display: block; width: 100%; max-height: 600px; object-fit: contain; border: 3px solid var(--ink); border-radius: 13px; background: #f2f2f2; }
+  .shot img { display: block; width: 100%; height: auto; max-height: 600px; object-fit: contain; border: 3px solid var(--ink); border-radius: 13px; background: #f2f2f2; }
   .caption { position: absolute; left: 24px; bottom: -15px; padding: 8px 13px; border: 3px solid var(--ink); border-radius: 12px; background: var(--tomato); color: white; font-weight: 950; }
+  .stepper { display: grid; gap: 12px; margin-top: 20px; }
+  .step-row { display: grid; grid-template-columns: 42px 1fr; gap: 12px; align-items: start; padding: 13px 15px; border: 3px solid var(--ink); border-radius: 15px; background: #fff; box-shadow: 4px 4px 0 var(--ink); }
+  .step-row:nth-child(2n) { background: #fff0ca; }
+  .step-badge { display: grid; place-items: center; width: 34px; height: 34px; border: 3px solid var(--ink); border-radius: 50%; background: var(--tomato); color: white; font-weight: 950; }
+  .step-row b { display: block; font-size: 22px; line-height: 1.2; }
+  .step-row p { margin: 5px 0 0; color: var(--muted); font-size: 17px; line-height: 1.35; font-weight: 700; }
   .footer { position: absolute; left: 30px; right: 30px; bottom: 16px; display: flex; justify-content: space-between; color: var(--muted); font-size: 14px; font-weight: 900; }
   .progress { position: fixed; left: 24px; right: 24px; bottom: 9px; height: 10px; border: 2px solid var(--ink); border-radius: 999px; background: white; z-index: 20; }
   .progress span { display: block; width: 0; height: 100%; border-radius: 999px; background: var(--tomato); transition: width .16s ease; }
@@ -75,7 +82,29 @@
 <div class="zoom-viewer" id="zoomViewer" aria-hidden="true"><div class="zoom-frame"><img id="zoomImage" alt=""></div></div>
 <script>
 const slides = [
-  { section: "CONTENT LAB", title: "示例页", tag: "小亮风格 HTML PPT", headline: "把文章做成<span class='accent'>可录屏讲解</span>的 PPT", lead: "替换 slides 数组和图片路径即可。", image: "images/example.png", caption: "示例图片" }
+  {
+    section: "CONTENT LAB",
+    title: "示例页",
+    layout: "image",
+    tag: "小亮风格 HTML PPT",
+    headline: "把文章做成<span class='accent'>可录屏讲解</span>的 PPT",
+    lead: "替换 slides 数组和图片路径即可。",
+    image: "images/example.png",
+    caption: "示例图片"
+  },
+  {
+    section: "// STEPS",
+    title: "步骤 + 图片示例",
+    layout: "imageStep",
+    tag: "纵向步骤条",
+    headline: "长中文步骤不要挤进横向小卡片",
+    steps: [
+      ["先看左侧分类", "说明这一步要让观众注意什么，文字可以自然换行。"],
+      ["再看右侧截图", "截图框按原图比例包裹，不用固定高度撑出大块空白。"]
+    ],
+    image: "images/example.png",
+    caption: "按原图比例显示"
+  }
 ];
 const deck = document.querySelector("#deck");
 const bar = document.querySelector("#bar");
@@ -86,7 +115,19 @@ const zoomFrame = document.querySelector(".zoom-frame");
 let index = 0;
 let zoomCloseTimer = 0;
 
-deck.innerHTML = slides.map((s, i) => `<section class="slide" data-title="${s.title}"><div class="pin">${s.section}</div><div class="layout"><div><span class="mark">${s.tag}</span><h2>${s.headline}</h2><p class="lead">${s.lead}</p></div><div class="shot"><img src="${s.image}" alt=""><span class="caption">${s.caption}</span></div></div><div class="footer"><span>Xiaoliang HTML PPT Skill</span><span>${i + 1} / ${slides.length}</span></div></section>`).join("");
+function renderSlide(s, i) {
+  const text = `<div><span class="mark">${s.tag}</span><h2>${s.headline}</h2>${s.lead ? `<p class="lead">${s.lead}</p>` : ""}</div>`;
+  const shot = `<div class="shot"><img src="${s.image}" alt=""><span class="caption">${s.caption}</span></div>`;
+  let body = "";
+  if (s.layout === "imageStep") {
+    const rows = s.steps.map((step, n) => `<div class="step-row"><span class="step-badge">${n + 1}</span><div><b>${step[0]}</b><p>${step[1]}</p></div></div>`).join("");
+    body = `<div class="layout image-step"><div><span class="mark">${s.tag}</span><h2>${s.headline}</h2><div class="stepper">${rows}</div></div>${shot}</div>`;
+  } else {
+    body = `<div class="layout">${text}${shot}</div>`;
+  }
+  return `<section class="slide" data-title="${s.title}"><div class="pin">${s.section}</div>${body}<div class="footer"><span>Xiaoliang HTML PPT Skill</span><span>${i + 1} / ${slides.length}</span></div></section>`;
+}
+deck.innerHTML = slides.map(renderSlide).join("");
 const slideEls = [...document.querySelectorAll(".slide")];
 
 function render() {

@@ -69,6 +69,10 @@ Use the image where the audience needs it:
 
 If a screenshot contains dense UI, give it a large right panel or a full slide. Avoid making key screenshots too small.
 
+For screenshots in framed cards, preserve the original image ratio. Do not create a fixed-height frame that leaves large blank bands around a wide screenshot. The image card should wrap the rendered screenshot, with only a small matte/padding and caption sticker.
+
+For "steps + screenshot" pages, use a vertical stepper rather than several narrow horizontal cards. Long Chinese step titles and explanations should have enough width to wrap naturally.
+
 ## 6. Implement
 
 Prefer a data-driven single HTML file:

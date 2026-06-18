@@ -102,6 +102,8 @@ See `references/interactions.md` for the implementation pattern.
 ## Authoring Rules
 
 - Use real screenshots large enough to inspect. If a screenshot contains UI details, avoid tiny side-by-side placement.
+- Screenshot cards must wrap the original image ratio. Do not use fixed-height image frames that create large blank bands above or below the screenshot.
+- For "steps + screenshot" slides, use a vertical stepper layout instead of narrow horizontal step cards when Chinese titles/descriptions are long.
 - Use two-image layouts only when both images remain legible; otherwise stack images vertically or give one image a dedicated slide.
 - For UI screenshots, visible text should identify what to look at: e.g. "Code button", "GitHub Pages source", "Secrets and variables".
 - Use concept illustrations for mental models and transitions; use real screenshots for operations.

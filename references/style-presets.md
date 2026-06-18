@@ -91,6 +91,8 @@ All styles must still satisfy the core HTML PPT requirements:
 - 16:9 slide stage.
 - Keyboard, wheel, overview, fullscreen, hash links.
 - Hover zoom for screenshots.
+- Screenshot frames wrap the original image ratio; avoid fixed-height frames that create large blank areas.
+- Steps beside screenshots use vertical steppers when Chinese text is long.
 - Image placement must be instructional, not decorative.
 - Text must not overflow.
 - Browser verification before final response.

@@ -83,6 +83,9 @@ Use image types intentionally:
 Rules:
 
 - UI screenshots with small text should usually occupy 45-60% of the slide.
+- Screenshot frames must wrap the image's natural aspect ratio. Do not force `height: 100%`, fixed image heights, or large empty matte areas above/below the screenshot.
+- Use `width: 100%; height: auto; max-height: ...; object-fit: contain;` for screenshot images, and let the `.shot` card size itself from the rendered image.
+- If a screenshot is very wide or very tall, choose a slide layout that gives it enough width/height instead of stretching a fixed frame.
 - Two-image layouts should stack vertically if side-by-side makes text unreadable.
 - Every screenshot should have a caption sticker naming the UI target.
 - Hover zoom is required for screenshots.
@@ -94,7 +97,53 @@ Default patterns:
 - `image`: text left, image right.
 - `imageWide`: text left, large screenshot right.
 - `duo`: text/checklist left, two stacked images right.
+- `imageStep`: vertical stepper on the left, screenshot on the right. Use this instead of horizontal step cards when step titles or descriptions are long Chinese text.
 - `text`: title plus cards/checklist.
 - `steps`: numbered action cards.
 
 Do not overuse centered title-only pages; this style works best when each slide teaches something concrete.
+
+## Stepper Layout For "Steps + Image"
+
+When a slide combines operation steps and a screenshot:
+
+- Prefer a vertical stepper: one full-width row per step, number badge on the left, text on the right.
+- Give the stepper column enough width for Chinese text; avoid narrow multi-column cards.
+- Keep step titles to one line when possible, but allow descriptions to wrap naturally.
+- Align the screenshot card to the center/right and let it wrap the original image ratio.
+
+Recommended CSS pattern:
+
+```css
+.layout.image-step {
+  grid-template-columns: minmax(460px, .9fr) minmax(560px, 1.1fr);
+  align-items: center;
+}
+.stepper {
+  display: grid;
+  gap: 12px;
+  margin-top: 20px;
+}
+.step-row {
+  display: grid;
+  grid-template-columns: 42px 1fr;
+  gap: 12px;
+  align-items: start;
+  padding: 13px 15px;
+  border: 3px solid var(--ink);
+  border-radius: 15px;
+  background: #fff;
+  box-shadow: 4px 4px 0 var(--ink);
+}
+.step-row b { font-size: 22px; line-height: 1.2; }
+.step-row p { margin-top: 5px; font-size: 17px; line-height: 1.35; }
+```
+
+Avoid:
+
+```css
+.shot img { height: 100%; }
+.steps.four { grid-template-columns: repeat(4, 1fr); }
+```
+
+for dense Chinese operation steps beside screenshots.
