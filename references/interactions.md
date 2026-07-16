@@ -122,6 +122,23 @@ function bindImageZoom() {
 
 Overview should show one thumbnail button per slide with page number and title. Clicking a thumbnail should close overview and navigate to the slide.
 
+The bundled template should build these buttons from `slides` after rendering:
+
+```js
+overview.innerHTML = slides.map((slide, i) => `
+  <button class="overview-card" type="button" data-index="${i}">
+    <b>${i + 1}</b>
+    <span>${slide.title || slide.headline || `Slide ${i + 1}`}</span>
+  </button>
+`).join("");
+```
+
+Each button should call `go(i)` and close overview. Overview must not be an empty overlay.
+
+## Hash Links
+
+Hash deep links are part of the deck contract. On load, parse `location.hash` values like `#/12` and activate that slide. Also listen for `hashchange` so copied links work during recording and review.
+
 ## Verification
 
 Browser-check:

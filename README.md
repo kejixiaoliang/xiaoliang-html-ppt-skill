@@ -13,6 +13,16 @@
 - 支持图片悬停柔和放大，方便录屏时展示截图细节
 - 支持多种视觉风格
 
+## 当前能力状态
+
+这个 skill 当前是一个教学型 HTML PPT 工作流，不是普通摘要型 PPT 模板。使用时应先完整阅读文章和图片素材，再按概念、界面、操作步骤、常见误区和行动总结拆页。
+
+当前模板内置三类能力：
+
+- 三种风格：小亮手绘实验室、圆润孟菲斯、粗黑孟菲斯
+- 常用布局：图文页、大图页、双图页、文字卡片页、步骤页、步骤加截图页
+- 录屏交互：键盘翻页、滚轮翻页、概览模式、全屏、hash 深链、图片悬停放大
+
 ## 可选风格
 
 ### 1. 小亮手绘实验室
@@ -179,3 +189,17 @@ py C:\Users\kangt\.codex\skills\.system\skill-creator\scripts\quick_validate.py 
 - 键盘翻页是否正常
 - 鼠标滚轮翻页是否正常
 - 图片悬停放大是否正常
+
+## 迭代流程
+
+本项目中建议先修改局部开发源：
+
+```text
+E:\CodeFile\MyAIProject\html-ppt\xiaoliang-html-ppt-skill
+```
+
+确认校验和实际生成效果 OK 后，再同步到全局 skill：
+
+```text
+C:\Users\kangt\.codex\skills\xiaoliang-html-ppt-skill
+```

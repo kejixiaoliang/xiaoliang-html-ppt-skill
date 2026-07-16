@@ -138,6 +138,7 @@
     transform: rotate(-8deg);
   }
   .slide.active { display: block; }
+  .slide > * { position: relative; z-index: 1; }
   .pin { position: absolute; left: 28px; top: 20px; transform: rotate(-2deg); padding: 7px 14px; border: 3px solid var(--ink); border-radius: 999px; background: var(--mustard); font-weight: 950; }
   .mark { display: inline-flex; padding: 8px 14px; border: 3px solid var(--ink); border-radius: 999px; background: var(--mint); font-weight: 950; }
   h1, h2, p { margin: 0; }
@@ -170,7 +171,19 @@
   .lead { margin-top: 18px; color: var(--muted); font-size: 25px; line-height: 1.42; font-weight: 750; }
   .accent { color: var(--tomato); }
   .layout { height: 100%; display: grid; grid-template-columns: 1fr 1fr; gap: 36px; align-items: center; }
+  .layout.image-wide { grid-template-columns: minmax(390px, .72fr) minmax(650px, 1.28fr); }
   .layout.image-step { grid-template-columns: minmax(460px, .9fr) minmax(560px, 1.1fr); }
+  .layout.duo { grid-template-columns: minmax(420px, .86fr) minmax(600px, 1.14fr); }
+  .duo-stack { display: grid; gap: 24px; align-content: center; }
+  .duo-stack .shot img { max-height: 285px; }
+  .text-stack { display: grid; height: 100%; align-content: center; gap: 22px; }
+  .card-grid { display: grid; grid-template-columns: repeat(2, minmax(0, 1fr)); gap: 18px; margin-top: 24px; }
+  .info-card { border: 3px solid var(--ink); border-radius: 18px; background: #fff; box-shadow: 6px 6px 0 var(--ink); padding: 18px 20px; }
+  .info-card b { display: block; font-size: 23px; line-height: 1.2; }
+  .info-card p { margin-top: 8px; color: var(--muted); font-size: 18px; line-height: 1.38; font-weight: 700; }
+  .checklist { display: grid; gap: 13px; margin-top: 24px; }
+  .check-row { display: grid; grid-template-columns: 34px 1fr; gap: 12px; align-items: start; padding: 14px 16px; border: 3px solid var(--ink); border-radius: 16px; background: #fff; box-shadow: 5px 5px 0 var(--ink); font-size: 21px; line-height: 1.35; font-weight: 850; }
+  .check-row::before { content: "✓"; display: grid; place-items: center; width: 30px; height: 30px; border: 3px solid var(--ink); border-radius: 50%; background: var(--green); font-weight: 950; }
   .shot { position: relative; border: var(--line); border-radius: 20px; background: #fff; box-shadow: 8px 8px 0 var(--ink); padding: 10px; cursor: zoom-in; }
   body.style-rounded-memphis .shot {
     border-radius: 28px;
@@ -203,11 +216,27 @@
     border-radius: 6px;
     box-shadow: 7px 7px 0 var(--ink);
   }
+  body.style-rounded-memphis .info-card,
+  body.style-rounded-memphis .check-row {
+    border-width: 4px;
+    border-radius: 24px;
+    box-shadow: 7px 7px 0 var(--ink);
+  }
+  body.style-bold-memphis .info-card,
+  body.style-bold-memphis .check-row {
+    border-width: 5px;
+    border-radius: 8px;
+    box-shadow: 9px 9px 0 var(--ink);
+  }
   .footer { position: absolute; left: 30px; right: 30px; bottom: 16px; display: flex; justify-content: space-between; color: var(--muted); font-size: 14px; font-weight: 900; }
   .progress { position: fixed; left: 24px; right: 24px; bottom: 9px; height: 10px; border: 2px solid var(--ink); border-radius: 999px; background: white; z-index: 20; }
   .progress span { display: block; width: 0; height: 100%; border-radius: 999px; background: var(--tomato); transition: width .16s ease; }
   .overview { display: none; position: fixed; inset: 0; z-index: 50; overflow: auto; padding: 34px; background: rgba(255,244,220,.96); }
   .overview.open { display: grid; grid-template-columns: repeat(auto-fill, minmax(220px, 1fr)); gap: 18px; }
+  .overview-card { min-height: 128px; text-align: left; border: var(--line); border-radius: 18px; background: #fffdf4; box-shadow: 7px 7px 0 var(--ink); padding: 16px; color: var(--ink); cursor: pointer; font: inherit; }
+  .overview-card b { display: inline-grid; place-items: center; min-width: 42px; height: 34px; margin-bottom: 12px; border: 3px solid var(--ink); border-radius: 999px; background: var(--mustard); font-size: 18px; }
+  .overview-card span { display: block; font-size: 18px; line-height: 1.3; font-weight: 900; }
+  .overview-card:hover { transform: translate(-2px, -2px); box-shadow: 9px 9px 0 var(--ink); }
   .zoom-viewer { position: fixed; inset: 0; z-index: 80; display: grid; place-items: center; padding: 34px; background: rgba(32,27,23,.42); opacity: 0; visibility: hidden; pointer-events: none; transition: opacity .16s ease, visibility .16s ease; }
   .zoom-viewer.open { opacity: 1; visibility: visible; pointer-events: auto; }
   .zoom-frame { max-width: min(94vw, 1500px); max-height: 88vh; padding: 14px; border: var(--line); border-radius: 22px; background: #fffdf4; box-shadow: 12px 12px 0 var(--ink); opacity: 0; transform: rotate(-.4deg) scale(.965); transition: opacity .16s ease, transform .18s cubic-bezier(.2,.8,.2,1); }
@@ -245,6 +274,20 @@ const slides = [
     ],
     image: "images/example.png",
     caption: "按原图比例显示"
+  },
+  {
+    section: "// TEXT",
+    title: "文字卡片示例",
+    layout: "text",
+    tag: "结构化讲解",
+    headline: "把一个概念拆成<span class='accent'>可理解的卡片</span>",
+    lead: "适合解释原则、误区、判断标准和阶段总结。",
+    cards: [
+      ["先给判断", "这一页只讲一个清晰结论。"],
+      ["再给例子", "用真实界面或操作语境支撑它。"],
+      ["最后给动作", "告诉观众下一步应该看哪里。"],
+      ["避免空话", "不要只写提升效率、方便协作。"]
+    ]
   }
 ];
 const deck = document.querySelector("#deck");
@@ -256,13 +299,47 @@ const zoomFrame = document.querySelector(".zoom-frame");
 let index = 0;
 let zoomCloseTimer = 0;
 
+function escapeHTML(value) {
+  return String(value ?? "").replace(/[&<>"']/g, char => ({
+    "&": "&amp;",
+    "<": "&lt;",
+    ">": "&gt;",
+    '"': "&quot;",
+    "'": "&#39;"
+  }[char]));
+}
+function renderIntro(s) {
+  return `<div><span class="mark">${s.tag}</span><h2>${s.headline}</h2>${s.lead ? `<p class="lead">${s.lead}</p>` : ""}</div>`;
+}
+function renderShot(image, caption = "") {
+  if (!image) return "";
+  return `<div class="shot"><img src="${escapeHTML(image)}" alt=""><span class="caption">${escapeHTML(caption)}</span></div>`;
+}
+function renderCards(cards = []) {
+  return `<div class="card-grid">${cards.map(card => `<div class="info-card"><b>${card[0]}</b><p>${card[1]}</p></div>`).join("")}</div>`;
+}
+function renderChecks(items = []) {
+  return `<div class="checklist">${items.map(item => `<div class="check-row">${item}</div>`).join("")}</div>`;
+}
+function renderStepRows(steps = []) {
+  return `<div class="stepper">${steps.map((step, n) => `<div class="step-row"><span class="step-badge">${n + 1}</span><div><b>${step[0]}</b><p>${step[1]}</p></div></div>`).join("")}</div>`;
+}
 function renderSlide(s, i) {
-  const text = `<div><span class="mark">${s.tag}</span><h2>${s.headline}</h2>${s.lead ? `<p class="lead">${s.lead}</p>` : ""}</div>`;
-  const shot = `<div class="shot"><img src="${s.image}" alt=""><span class="caption">${s.caption}</span></div>`;
+  const text = renderIntro(s);
+  const shot = renderShot(s.image, s.caption);
   let body = "";
   if (s.layout === "imageStep") {
-    const rows = s.steps.map((step, n) => `<div class="step-row"><span class="step-badge">${n + 1}</span><div><b>${step[0]}</b><p>${step[1]}</p></div></div>`).join("");
-    body = `<div class="layout image-step"><div><span class="mark">${s.tag}</span><h2>${s.headline}</h2><div class="stepper">${rows}</div></div>${shot}</div>`;
+    body = `<div class="layout image-step"><div><span class="mark">${s.tag}</span><h2>${s.headline}</h2>${s.lead ? `<p class="lead">${s.lead}</p>` : ""}${renderStepRows(s.steps)}</div>${shot}</div>`;
+  } else if (s.layout === "imageWide") {
+    body = `<div class="layout image-wide">${text}${shot}</div>`;
+  } else if (s.layout === "duo") {
+    const shots = (s.images || []).map(item => renderShot(item.src || item.image, item.caption)).join("");
+    body = `<div class="layout duo">${text}<div class="duo-stack">${shots}</div></div>`;
+  } else if (s.layout === "text") {
+    const details = s.cards ? renderCards(s.cards) : renderChecks(s.checks || []);
+    body = `<div class="text-stack">${text}${details}</div>`;
+  } else if (s.layout === "steps") {
+    body = `<div class="text-stack"><span class="mark">${s.tag}</span><h2>${s.headline}</h2>${s.lead ? `<p class="lead">${s.lead}</p>` : ""}${renderStepRows(s.steps)}</div>`;
   } else {
     body = `<div class="layout">${text}${shot}</div>`;
   }
@@ -271,6 +348,25 @@ function renderSlide(s, i) {
 deck.innerHTML = slides.map(renderSlide).join("");
 const slideEls = [...document.querySelectorAll(".slide")];
 
+function readHashIndex() {
+  const match = location.hash.match(/^#\/(\d+)$/);
+  if (!match) return 0;
+  return Math.max(0, Math.min(slideEls.length - 1, Number(match[1]) - 1));
+}
+function renderOverview() {
+  overview.innerHTML = slides.map((slide, i) => `
+    <button class="overview-card" type="button" data-index="${i}">
+      <b>${i + 1}</b>
+      <span>${escapeHTML(slide.title || slide.headline || `Slide ${i + 1}`)}</span>
+    </button>
+  `).join("");
+  overview.querySelectorAll(".overview-card").forEach(button => {
+    button.addEventListener("click", () => {
+      overview.classList.remove("open");
+      go(Number(button.dataset.index));
+    });
+  });
+}
 function render() {
   slideEls.forEach((slide, i) => slide.classList.toggle("active", i === index));
   bar.style.width = `${((index + 1) / slideEls.length) * 100}%`;
@@ -319,6 +415,10 @@ document.addEventListener("keydown", event => {
     zoomViewer.setAttribute("aria-hidden", "true");
   }
 });
+window.addEventListener("hashchange", () => {
+  index = readHashIndex();
+  render();
+});
 let lastWheelAt = 0;
 document.addEventListener("wheel", event => {
   if (overview.classList.contains("open")) return;
@@ -327,6 +427,8 @@ document.addEventListener("wheel", event => {
   lastWheelAt = now;
   go(index + (event.deltaY > 0 ? 1 : -1));
 }, { passive: true });
+index = readHashIndex();
+renderOverview();
 bindImageZoom();
 render();
 </script>

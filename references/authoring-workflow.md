@@ -85,12 +85,24 @@ Prefer a data-driven single HTML file:
 
 Use `assets/template.html` as a starting point when useful.
 
+The template supports these layout names:
+
+- `image`: balanced text plus one image.
+- `imageWide`: narrower text plus a large screenshot.
+- `duo`: text plus two stacked images.
+- `imageStep`: vertical stepper plus one screenshot.
+- `text`: headline plus cards or checklist rows.
+- `steps`: numbered action cards without a screenshot.
+
+Use `imageWide` for dense UI screenshots, `imageStep` for operations beside screenshots, and `duo` only when both images remain legible.
+
 ## 7. Verify
 
 Run browser verification before final response:
 
 - Count slides.
 - Check every referenced image exists and loads.
+- Open a deep link such as `#/3` and confirm it activates the correct slide.
 - Check no key text/image element overflows the slide.
 - Test keyboard navigation.
 - Test wheel navigation.

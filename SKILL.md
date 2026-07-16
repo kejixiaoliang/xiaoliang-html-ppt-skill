@@ -44,6 +44,7 @@ This skill is not for generic corporate decks. It is for creator-led explainers 
    - Use 16:9 slide stage.
    - Support keyboard navigation, wheel navigation, overview mode, fullscreen, and image hover zoom.
    - Use local relative image paths so the deck works inside the project folder.
+   - Use bundled layouts intentionally: `image`, `imageWide`, `duo`, `imageStep`, `text`, and `steps`.
 
 6. **Verify with a browser.**
    - Open with Chrome/Playwright or the available browser tool.
@@ -121,6 +122,19 @@ When creating a new Xiaoliang-style HTML PPT from scratch:
 5. Copy or adapt `assets/template.html`.
 6. Replace the slide data and image paths.
 7. Verify before reporting done.
+
+## Template Capabilities
+
+The bundled template includes these common layouts:
+
+- `image`: balanced text plus one image.
+- `imageWide`: text plus a larger UI screenshot.
+- `duo`: text plus two stacked images.
+- `imageStep`: vertical stepper plus a screenshot.
+- `text`: headline plus cards or checklist rows.
+- `steps`: numbered operation cards.
+
+It also includes keyboard/wheel navigation, `O` overview, `F` fullscreen, hash deep links, and hover zoom. Preserve these capabilities when adapting the template.
 
 ## Done Checklist
 
