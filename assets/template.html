@@ -81,6 +81,16 @@
     box-shadow: var(--shadow);
     padding: 46px 56px 42px;
   }
+  body.aspect-16x9 .slide {
+    width: min(calc(100vw - 44px), calc((100vh - 44px) * 16 / 9));
+    aspect-ratio: 16 / 9;
+  }
+  body.aspect-3x4 .deck { padding: 18px; }
+  body.aspect-3x4 .slide {
+    width: min(calc(100vw - 44px), calc((100vh - 44px) * 3 / 4));
+    aspect-ratio: 3 / 4;
+    padding: 42px 38px 38px;
+  }
   body.style-rounded-memphis .slide {
     border-radius: 30px;
     padding: 48px 58px 44px;
@@ -89,6 +99,10 @@
     border-radius: 10px;
     box-shadow: 14px 14px 0 var(--ink);
     padding: 48px 58px 44px;
+  }
+  body.aspect-3x4.style-rounded-memphis .slide,
+  body.aspect-3x4.style-bold-memphis .slide {
+    padding: 42px 38px 38px;
   }
   body.style-rounded-memphis .slide::before,
   body.style-rounded-memphis .slide::after,
@@ -143,11 +157,13 @@
   .mark { display: inline-flex; padding: 8px 14px; border: 3px solid var(--ink); border-radius: 999px; background: var(--mint); font-weight: 950; }
   h1, h2, p { margin: 0; }
   h2 { margin-top: 28px; font-size: 56px; line-height: 1.08; }
+  body.aspect-3x4 h2 { margin-top: 22px; font-size: 46px; line-height: 1.06; }
   body.style-rounded-memphis h2 {
     font-size: 60px;
     line-height: .98;
     font-weight: 950;
   }
+  body.aspect-3x4.style-rounded-memphis h2 { font-size: 50px; line-height: 1; }
   body.style-rounded-memphis .accent {
     display: inline-block;
     padding: 0 .16em;
@@ -165,10 +181,16 @@
     -webkit-text-stroke: 2px #000;
     text-shadow: 5px 5px 0 #000, 9px 9px 0 #ffde17;
   }
+  body.aspect-3x4.style-bold-memphis h2 {
+    font-size: 52px;
+    line-height: .98;
+    text-shadow: 4px 4px 0 #000, 7px 7px 0 #ffde17;
+  }
   body.style-bold-memphis .accent {
     color: #ffde17;
   }
   .lead { margin-top: 18px; color: var(--muted); font-size: 25px; line-height: 1.42; font-weight: 750; }
+  body.aspect-3x4 .lead { font-size: 22px; line-height: 1.42; }
   .accent { color: var(--tomato); }
   .layout { height: 100%; display: grid; grid-template-columns: 1fr 1fr; gap: 36px; align-items: center; }
   .layout.image-wide { grid-template-columns: minmax(390px, .72fr) minmax(650px, 1.28fr); }
@@ -184,6 +206,61 @@
   .checklist { display: grid; gap: 13px; margin-top: 24px; }
   .check-row { display: grid; grid-template-columns: 34px 1fr; gap: 12px; align-items: start; padding: 14px 16px; border: 3px solid var(--ink); border-radius: 16px; background: #fff; box-shadow: 5px 5px 0 var(--ink); font-size: 21px; line-height: 1.35; font-weight: 850; }
   .check-row::before { content: "✓"; display: grid; place-items: center; width: 30px; height: 30px; border: 3px solid var(--ink); border-radius: 50%; background: var(--green); font-weight: 950; }
+  .vertical-card { height: 100%; display: grid; align-content: center; gap: 22px; }
+  .vertical-cover { height: 100%; display: grid; grid-template-rows: auto 1fr auto; gap: 22px; }
+  .vertical-cover h2 { font-size: 58px; line-height: 1; }
+  .cover-visual { align-self: end; }
+  .cover-visual .shot img { max-height: 360px; }
+  .quote-card { height: 100%; display: grid; place-items: center; text-align: center; }
+  .quote-mark { display: inline-grid; place-items: center; width: 64px; height: 64px; margin: 0 auto 18px; border: var(--line); border-radius: 50%; background: var(--mustard); box-shadow: 6px 6px 0 var(--ink); font-size: 42px; font-weight: 950; }
+  .quote-card h2 { margin-top: 0; font-size: 54px; line-height: 1.05; }
+  .stacked-card { height: 100%; display: grid; grid-template-rows: auto minmax(0, 1fr); gap: 22px; align-items: center; }
+  .stacked-card.image-first { grid-template-rows: minmax(0, 1fr) auto; }
+  .stacked-card .shot { align-self: center; }
+  .stacked-card .shot img { max-height: 420px; }
+  .vertical-stepper { display: grid; gap: 14px; margin-top: 18px; }
+  .vertical-stepper .step-row { grid-template-columns: 46px 1fr; padding: 16px 17px; }
+  .vertical-stepper .step-row b { font-size: 23px; }
+  .vertical-stepper .step-row p { font-size: 18px; }
+  body.aspect-3x4.style-rounded-memphis .vertical-cover h2,
+  body.aspect-3x4.style-rounded-memphis .quote-card h2 {
+    font-size: 54px;
+  }
+  body.aspect-3x4.style-rounded-memphis .quote-mark,
+  body.aspect-3x4.style-rounded-memphis .info-card,
+  body.aspect-3x4.style-rounded-memphis .vertical-stepper .step-row,
+  body.aspect-3x4.style-rounded-memphis .shot {
+    border-width: 4px;
+    border-radius: 28px;
+    box-shadow: 8px 8px 0 var(--ink);
+  }
+  body.aspect-3x4.style-rounded-memphis .mark {
+    background: #00e676;
+    border-width: 4px;
+    border-radius: 999px;
+  }
+  body.aspect-3x4.style-bold-memphis .vertical-cover h2,
+  body.aspect-3x4.style-bold-memphis .quote-card h2 {
+    font-size: 56px;
+    line-height: .96;
+    color: #fff;
+    -webkit-text-stroke: 2px #000;
+    text-shadow: 4px 4px 0 #000, 8px 8px 0 #ffde17;
+  }
+  body.aspect-3x4.style-bold-memphis .quote-mark,
+  body.aspect-3x4.style-bold-memphis .info-card,
+  body.aspect-3x4.style-bold-memphis .vertical-stepper .step-row,
+  body.aspect-3x4.style-bold-memphis .shot {
+    border-width: 5px;
+    border-radius: 8px;
+    box-shadow: 10px 10px 0 var(--ink);
+  }
+  body.aspect-3x4.style-bold-memphis .mark {
+    background: #ffde17;
+    border-width: 5px;
+    border-radius: 8px;
+    text-transform: uppercase;
+  }
   .shot { position: relative; border: var(--line); border-radius: 20px; background: #fff; box-shadow: 8px 8px 0 var(--ink); padding: 10px; cursor: zoom-in; }
   body.style-rounded-memphis .shot {
     border-radius: 28px;
@@ -199,6 +276,9 @@
     box-shadow: 12px 12px 0 var(--ink);
   }
   .shot img { display: block; width: 100%; height: auto; max-height: 600px; object-fit: contain; border: 3px solid var(--ink); border-radius: 13px; background: #f2f2f2; }
+  .shot.missing-image { min-height: 190px; display: grid; place-items: center; }
+  .shot.missing-image::before { content: "替换为本地图片"; display: grid; place-items: center; min-height: 150px; width: 100%; border: 3px dashed var(--ink); border-radius: 13px; background: #fff8e8; color: var(--muted); font-size: 22px; font-weight: 950; }
+  .shot.missing-image img { display: none; }
   .caption { position: absolute; left: 24px; bottom: -15px; padding: 8px 13px; border: 3px solid var(--ink); border-radius: 12px; background: var(--tomato); color: white; font-weight: 950; }
   .stepper { display: grid; gap: 12px; margin-top: 20px; }
   .step-row { display: grid; grid-template-columns: 42px 1fr; gap: 12px; align-items: start; padding: 13px 15px; border: 3px solid var(--ink); border-radius: 15px; background: #fff; box-shadow: 4px 4px 0 var(--ink); }
@@ -238,20 +318,38 @@
   .overview-card span { display: block; font-size: 18px; line-height: 1.3; font-weight: 900; }
   .overview-card:hover { transform: translate(-2px, -2px); box-shadow: 9px 9px 0 var(--ink); }
   .zoom-viewer { position: fixed; inset: 0; z-index: 80; display: grid; place-items: center; padding: 34px; background: rgba(32,27,23,.42); opacity: 0; visibility: hidden; pointer-events: none; transition: opacity .16s ease, visibility .16s ease; }
+  .zoom-viewer.slide-bound {
+    inset: auto;
+    left: var(--zoom-left, 0px);
+    top: var(--zoom-top, 0px);
+    width: var(--zoom-width, 100vw);
+    height: var(--zoom-height, 100vh);
+    padding: 24px;
+    border-radius: 24px;
+    overflow: hidden;
+  }
   .zoom-viewer.open { opacity: 1; visibility: visible; pointer-events: auto; }
   .zoom-frame { max-width: min(94vw, 1500px); max-height: 88vh; padding: 14px; border: var(--line); border-radius: 22px; background: #fffdf4; box-shadow: 12px 12px 0 var(--ink); opacity: 0; transform: rotate(-.4deg) scale(.965); transition: opacity .16s ease, transform .18s cubic-bezier(.2,.8,.2,1); }
+  .zoom-viewer.slide-bound .zoom-frame {
+    max-width: calc(var(--zoom-width, 100vw) - 64px);
+    max-height: calc(var(--zoom-height, 100vh) - 64px);
+  }
   .zoom-viewer.open .zoom-frame { opacity: 1; transform: rotate(-.4deg) scale(1); }
   .zoom-frame img { display: block; max-width: calc(94vw - 42px); max-height: calc(88vh - 42px); object-fit: contain; }
+  .zoom-viewer.slide-bound .zoom-frame img {
+    max-width: calc(var(--zoom-width, 100vw) - 106px);
+    max-height: calc(var(--zoom-height, 100vh) - 106px);
+  }
 </style>
 </head>
-<!-- Change body class to style-rounded-memphis or style-bold-memphis when the user selects those styles. -->
-<body class="style-xiaoliang-lab">
+<!-- Change style class for visual presets and aspect class for deck/cards mode. -->
+<body class="style-xiaoliang-lab aspect-16x9">
 <main class="deck" id="deck"></main>
 <div class="progress"><span id="bar"></span></div>
 <div class="overview" id="overview"></div>
 <div class="zoom-viewer" id="zoomViewer" aria-hidden="true"><div class="zoom-frame"><img id="zoomImage" alt=""></div></div>
 <script>
-const slides = [
+const deckSlides = [
   {
     section: "CONTENT LAB",
     title: "示例页",
@@ -290,6 +388,67 @@ const slides = [
     ]
   }
 ];
+const cardSlides = [
+  {
+    section: "CARDS 01",
+    title: "3:4 封面示例",
+    layout: "coverVertical",
+    tag: "3:4 图文卡片",
+    headline: "把教程变成<span class='accent'>可发布</span>的图文卡片",
+    lead: "适合小红书、公众号配图和朋友圈图文。每页都要能独立读懂。",
+    image: "images/example.png",
+    caption: "主视觉或关键截图"
+  },
+  {
+    section: "CARDS 02",
+    title: "观点卡示例",
+    layout: "quoteCard",
+    tag: "核心判断",
+    headline: "3:4 不是横版 PPT 的裁剪版",
+    lead: "它要重新组织信息：更强标题、更短正文、更聚焦的截图。"
+  },
+  {
+    section: "CARDS 03",
+    title: "图文堆叠示例",
+    layout: "stackedImage",
+    tag: "截图聚焦",
+    headline: "一张卡只讲一个界面重点",
+    lead: "不要塞完整桌面截图，优先展示观众此刻需要看的区域。",
+    image: "images/example.png",
+    caption: "聚焦截图"
+  },
+  {
+    section: "CARDS 04",
+    title: "竖向步骤示例",
+    layout: "verticalSteps",
+    tag: "行动路径",
+    headline: "把流程拆成能扫读的竖向步骤",
+    steps: [
+      ["先抛出判断", "这一页让读者知道为什么要继续看。"],
+      ["再给具体动作", "每一步都要能在手机屏幕上轻松读完。"],
+      ["最后给下一步", "用总结卡或行动卡收束整组图文。"]
+    ]
+  }
+];
+const params = new URLSearchParams(location.search);
+const styleParam = params.get("style");
+if (styleParam === "rounded" || styleParam === "rounded-memphis") {
+  document.body.classList.remove("style-xiaoliang-lab", "style-bold-memphis");
+  document.body.classList.add("style-rounded-memphis");
+}
+if (styleParam === "bold" || styleParam === "bold-memphis") {
+  document.body.classList.remove("style-xiaoliang-lab", "style-rounded-memphis");
+  document.body.classList.add("style-bold-memphis");
+}
+if (params.get("mode") === "cards" || params.get("aspect") === "3x4") {
+  document.body.classList.remove("aspect-16x9");
+  document.body.classList.add("aspect-3x4");
+}
+if (params.get("mode") === "deck" || params.get("aspect") === "16x9") {
+  document.body.classList.remove("aspect-3x4");
+  document.body.classList.add("aspect-16x9");
+}
+const slides = document.body.classList.contains("aspect-3x4") ? cardSlides : deckSlides;
 const deck = document.querySelector("#deck");
 const bar = document.querySelector("#bar");
 const overview = document.querySelector("#overview");
@@ -313,22 +472,34 @@ function renderIntro(s) {
 }
 function renderShot(image, caption = "") {
   if (!image) return "";
-  return `<div class="shot"><img src="${escapeHTML(image)}" alt=""><span class="caption">${escapeHTML(caption)}</span></div>`;
+  return `<div class="shot"><img src="${escapeHTML(image)}" alt="" onerror="this.parentElement.classList.add('missing-image')"><span class="caption">${escapeHTML(caption)}</span></div>`;
 }
 function renderCards(cards = []) {
-  return `<div class="card-grid">${cards.map(card => `<div class="info-card"><b>${card[0]}</b><p>${card[1]}</p></div>`).join("")}</div>`;
+  return `<div class="card-grid">${cards.map(card => `<div class="info-card"><b>${escapeHTML(card[0])}</b><p>${escapeHTML(card[1])}</p></div>`).join("")}</div>`;
 }
 function renderChecks(items = []) {
-  return `<div class="checklist">${items.map(item => `<div class="check-row">${item}</div>`).join("")}</div>`;
+  return `<div class="checklist">${items.map(item => `<div class="check-row">${escapeHTML(item)}</div>`).join("")}</div>`;
 }
 function renderStepRows(steps = []) {
-  return `<div class="stepper">${steps.map((step, n) => `<div class="step-row"><span class="step-badge">${n + 1}</span><div><b>${step[0]}</b><p>${step[1]}</p></div></div>`).join("")}</div>`;
+  return `<div class="stepper">${steps.map((step, n) => `<div class="step-row"><span class="step-badge">${n + 1}</span><div><b>${escapeHTML(step[0])}</b><p>${escapeHTML(step[1])}</p></div></div>`).join("")}</div>`;
+}
+function renderVerticalStepRows(steps = []) {
+  return `<div class="vertical-stepper">${steps.map((step, n) => `<div class="step-row"><span class="step-badge">${n + 1}</span><div><b>${escapeHTML(step[0])}</b><p>${escapeHTML(step[1])}</p></div></div>`).join("")}</div>`;
 }
 function renderSlide(s, i) {
   const text = renderIntro(s);
   const shot = renderShot(s.image, s.caption);
   let body = "";
-  if (s.layout === "imageStep") {
+  if (s.layout === "coverVertical") {
+    body = `<div class="vertical-cover"><div><span class="mark">${s.tag}</span><h2>${s.headline}</h2>${s.lead ? `<p class="lead">${s.lead}</p>` : ""}</div><div></div><div class="cover-visual">${shot}</div></div>`;
+  } else if (s.layout === "quoteCard") {
+    body = `<div class="quote-card"><div><span class="quote-mark">“</span><span class="mark">${s.tag}</span><h2>${s.headline}</h2>${s.lead ? `<p class="lead">${s.lead}</p>` : ""}</div></div>`;
+  } else if (s.layout === "stackedImage") {
+    const imageFirst = s.imageFirst ? " image-first" : "";
+    body = `<div class="stacked-card${imageFirst}">${s.imageFirst ? `${shot}${text}` : `${text}${shot}`}</div>`;
+  } else if (s.layout === "verticalSteps") {
+    body = `<div class="vertical-card"><div><span class="mark">${s.tag}</span><h2>${s.headline}</h2>${s.lead ? `<p class="lead">${s.lead}</p>` : ""}${renderVerticalStepRows(s.steps)}</div></div>`;
+  } else if (s.layout === "imageStep") {
     body = `<div class="layout image-step"><div><span class="mark">${s.tag}</span><h2>${s.headline}</h2>${s.lead ? `<p class="lead">${s.lead}</p>` : ""}${renderStepRows(s.steps)}</div>${shot}</div>`;
   } else if (s.layout === "imageWide") {
     body = `<div class="layout image-wide">${text}${shot}</div>`;
@@ -370,16 +541,27 @@ function renderOverview() {
 function render() {
   slideEls.forEach((slide, i) => slide.classList.toggle("active", i === index));
   bar.style.width = `${((index + 1) / slideEls.length) * 100}%`;
-  history.replaceState(null, "", `#/${index + 1}`);
+  history.replaceState(null, "", `${location.pathname}${location.search}#/${index + 1}`);
 }
 function go(next) {
   index = Math.max(0, Math.min(slideEls.length - 1, next));
   render();
 }
 function bindImageZoom() {
+  function applyZoomBounds() {
+    const isCards = document.body.classList.contains("aspect-3x4");
+    zoomViewer.classList.toggle("slide-bound", isCards);
+    if (!isCards) return;
+    const rect = slideEls[index].getBoundingClientRect();
+    zoomViewer.style.setProperty("--zoom-left", `${rect.left}px`);
+    zoomViewer.style.setProperty("--zoom-top", `${rect.top}px`);
+    zoomViewer.style.setProperty("--zoom-width", `${rect.width}px`);
+    zoomViewer.style.setProperty("--zoom-height", `${rect.height}px`);
+  }
   document.querySelectorAll(".shot img").forEach(image => {
     image.addEventListener("mouseenter", () => {
       clearTimeout(zoomCloseTimer);
+      applyZoomBounds();
       zoomImage.src = image.currentSrc || image.src;
       zoomViewer.classList.add("open");
       zoomViewer.setAttribute("aria-hidden", "false");

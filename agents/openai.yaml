@@ -1,4 +1,4 @@
 interface:
   display_name: "Xiaoliang HTML PPT Skill"
-  short_description: "Creator-style HTML PPT decks."
-  default_prompt: "Use $xiaoliang-html-ppt-skill to turn my article and image assets into a screen-recording-friendly HTML PPT."
+  short_description: "Creator-style HTML PPT decks and 3:4 cards."
+  default_prompt: "Use $xiaoliang-html-ppt-skill to turn my article and image assets into a 16:9 HTML PPT or 3:4 graphic-card deck."

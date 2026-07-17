@@ -31,13 +31,19 @@ Dominant backgrounds should be warm paper, not blue, purple, black, or glassy gr
 
 ## Slide Stage
 
-Use a centered 16:9 slide:
+Use a centered slide. Default to 16:9 for `deck`; switch to 3:4 for `cards`.
 
 ```css
 .deck { width: 100vw; height: 100vh; display: grid; place-items: center; }
-.slide {
+body.aspect-16x9 .slide {
   width: min(calc(100vw - 44px), calc((100vh - 44px) * 16 / 9));
   aspect-ratio: 16 / 9;
+}
+body.aspect-3x4 .slide {
+  width: min(calc(100vw - 44px), calc((100vh - 44px) * 3 / 4));
+  aspect-ratio: 3 / 4;
+}
+.slide {
   border: var(--line);
   border-radius: 24px;
   box-shadow: var(--shadow);
@@ -56,6 +62,14 @@ Keep a thin progress bar outside or near the bottom of the stage.
 - Card text: 17-24px.
 - Use 0 letter spacing.
 - Emphasize with tomato red and underline highlight, not gradients.
+
+For `cards`, use slightly tighter vertical typography:
+
+- Cover titles: 50-68px.
+- Standard card titles: 38-52px.
+- Body/lead: 20-26px.
+- Card text: 17-22px.
+- Keep titles to 2-3 lines whenever possible.
 
 ## Components
 
@@ -89,10 +103,15 @@ Rules:
 - Two-image layouts should stack vertically if side-by-side makes text unreadable.
 - Every screenshot should have a caption sticker naming the UI target.
 - Hover zoom is required for screenshots.
+- In `cards` mode, hover zoom must be constrained to the active 3:4 slide frame. Do not let the enlarged screenshot exceed the recording canvas.
+
+For `cards`, screenshots should usually be focused crops or a single large image. Avoid placing a full desktop screenshot beside long text in 3:4; it will become unreadable.
 
 ## Layout Patterns
 
 Default patterns:
+
+Deck patterns:
 
 - `image`: text left, image right.
 - `imageWide`: text left, large screenshot right.
@@ -102,6 +121,15 @@ Default patterns:
 - `steps`: numbered action cards.
 
 Do not overuse centered title-only pages; this style works best when each slide teaches something concrete.
+
+Cards patterns:
+
+- `coverVertical`: large vertical title, short promise, optional visual near the bottom.
+- `quoteCard`: one strong claim, optional supporting sentence, minimal decoration.
+- `stackedImage`: text block and image stacked vertically. Use either text-first or image-first depending on the teaching path.
+- `verticalSteps`: full-width vertical step rows. Keep each step short enough to scan.
+
+For `cards`, prefer top-to-bottom composition over left/right composition. A 3:4 card should feel like a publishable image, not a squeezed landscape slide.
 
 ## Stepper Layout For "Steps + Image"
 

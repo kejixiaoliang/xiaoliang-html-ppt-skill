@@ -1,0 +1,519 @@
+<!DOCTYPE html>
+<html lang="zh-CN">
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width, initial-scale=1">
+<title>3:4 图文卡片示例 - Xiaoliang HTML PPT Skill</title>
+<style>
+  :root {
+    --paper: #fff4dc;
+    --paper-soft: #fff9ea;
+    --ink: #201b17;
+    --muted: #685f55;
+    --tomato: #f35b3f;
+    --mustard: #f2c84b;
+    --mint: #8bd6af;
+    --green: #a9d66f;
+    --sky: #93c9d8;
+    --line: 4px solid var(--ink);
+    --shadow: 10px 10px 0 var(--ink);
+  }
+  * { box-sizing: border-box; }
+  html, body { margin: 0; width: 100%; height: 100%; overflow: hidden; }
+  body {
+    color: var(--ink);
+    font-family: "Microsoft YaHei", "PingFang SC", "Noto Sans CJK SC", Arial, sans-serif;
+    background:
+      linear-gradient(rgba(32,27,23,.055) 1px, transparent 1px),
+      linear-gradient(90deg, rgba(32,27,23,.045) 1px, transparent 1px),
+      var(--paper);
+    background-size: 30px 30px;
+  }
+  .deck { width: 100vw; height: 100vh; display: grid; place-items: center; padding: 18px; }
+  .slide {
+    display: none;
+    position: relative;
+    width: min(calc(100vw - 44px), calc((100vh - 44px) * 3 / 4));
+    aspect-ratio: 3 / 4;
+    overflow: hidden;
+    border: var(--line);
+    border-radius: 24px;
+    background:
+      linear-gradient(rgba(32,27,23,.045) 1px, transparent 1px),
+      linear-gradient(90deg, rgba(32,27,23,.035) 1px, transparent 1px),
+      var(--paper-soft);
+    background-size: 26px 26px;
+    box-shadow: var(--shadow);
+    padding: 42px 38px 38px;
+  }
+  .slide.active { display: block; }
+  .slide > * { position: relative; z-index: 1; }
+  .pin {
+    position: absolute;
+    left: 28px;
+    top: 20px;
+    transform: rotate(-2deg);
+    padding: 7px 14px;
+    border: 3px solid var(--ink);
+    border-radius: 999px;
+    background: var(--mustard);
+    font-weight: 950;
+  }
+  .mark {
+    display: inline-flex;
+    width: max-content;
+    padding: 8px 14px;
+    border: 3px solid var(--ink);
+    border-radius: 999px;
+    background: var(--mint);
+    font-weight: 950;
+  }
+  h1, h2, p { margin: 0; }
+  h2 { margin-top: 22px; font-size: 46px; line-height: 1.06; }
+  .cover h2 { font-size: 58px; line-height: 1; }
+  .lead { margin-top: 18px; color: var(--muted); font-size: 22px; line-height: 1.42; font-weight: 750; }
+  .accent { color: var(--tomato); }
+  .vertical-card { height: 100%; display: grid; align-content: center; gap: 22px; }
+  .cover {
+    height: 100%;
+    display: grid;
+    grid-template-rows: auto 1fr auto;
+    gap: 24px;
+  }
+  .badge-row { display: flex; flex-wrap: wrap; gap: 10px; margin-top: 24px; }
+  .badge {
+    padding: 9px 13px;
+    border: 3px solid var(--ink);
+    border-radius: 999px;
+    background: #fff;
+    box-shadow: 4px 4px 0 var(--ink);
+    font-size: 18px;
+    font-weight: 900;
+  }
+  .card-grid { display: grid; gap: 16px; margin-top: 24px; }
+  .info-card {
+    border: 3px solid var(--ink);
+    border-radius: 18px;
+    background: #fff;
+    box-shadow: 6px 6px 0 var(--ink);
+    padding: 18px 20px;
+  }
+  .info-card b { display: block; font-size: 23px; line-height: 1.2; }
+  .info-card p { margin-top: 8px; color: var(--muted); font-size: 18px; line-height: 1.38; font-weight: 700; }
+  .shot {
+    position: relative;
+    border: var(--line);
+    border-radius: 20px;
+    background: #fff;
+    box-shadow: 8px 8px 0 var(--ink);
+    padding: 10px;
+    cursor: zoom-in;
+  }
+  .shot img {
+    display: block;
+    width: 100%;
+    height: auto;
+    max-height: 420px;
+    object-fit: contain;
+    border: 3px solid var(--ink);
+    border-radius: 13px;
+    background: #f2f2f2;
+  }
+  .caption {
+    position: absolute;
+    left: 24px;
+    bottom: -15px;
+    padding: 8px 13px;
+    border: 3px solid var(--ink);
+    border-radius: 12px;
+    background: var(--tomato);
+    color: white;
+    font-weight: 950;
+  }
+  .quote-card { height: 100%; display: grid; place-items: center; text-align: center; }
+  .quote-mark {
+    display: inline-grid;
+    place-items: center;
+    width: 64px;
+    height: 64px;
+    margin: 0 auto 18px;
+    border: var(--line);
+    border-radius: 50%;
+    background: var(--mustard);
+    box-shadow: 6px 6px 0 var(--ink);
+    font-size: 42px;
+    font-weight: 950;
+  }
+  .quote-card h2 { margin-top: 0; font-size: 54px; line-height: 1.05; }
+  .stepper { display: grid; gap: 14px; margin-top: 20px; }
+  .step-row {
+    display: grid;
+    grid-template-columns: 46px 1fr;
+    gap: 13px;
+    align-items: start;
+    padding: 16px 17px;
+    border: 3px solid var(--ink);
+    border-radius: 16px;
+    background: #fff;
+    box-shadow: 5px 5px 0 var(--ink);
+  }
+  .step-row:nth-child(2n) { background: #fff0ca; }
+  .step-badge {
+    display: grid;
+    place-items: center;
+    width: 36px;
+    height: 36px;
+    border: 3px solid var(--ink);
+    border-radius: 50%;
+    background: var(--tomato);
+    color: white;
+    font-weight: 950;
+  }
+  .step-row b { display: block; font-size: 22px; line-height: 1.2; }
+  .step-row p { margin: 6px 0 0; color: var(--muted); font-size: 18px; line-height: 1.36; font-weight: 700; }
+  .visual-note {
+    align-self: end;
+    border: var(--line);
+    border-radius: 22px;
+    background: #fff;
+    box-shadow: 8px 8px 0 var(--ink);
+    padding: 22px;
+  }
+  .mini-board {
+    display: grid;
+    grid-template-columns: repeat(2, 1fr);
+    gap: 12px;
+  }
+  .mini {
+    min-height: 92px;
+    border: 3px solid var(--ink);
+    border-radius: 16px;
+    padding: 14px;
+    background: #fff8e8;
+    font-size: 20px;
+    line-height: 1.2;
+    font-weight: 950;
+  }
+  .mini:nth-child(2) { background: var(--mint); }
+  .mini:nth-child(3) { background: var(--mustard); }
+  .mini:nth-child(4) { background: #ffd7c5; }
+  .shape {
+    position: absolute;
+    border: 4px solid var(--ink);
+    box-shadow: 5px 5px 0 var(--ink);
+    pointer-events: none;
+    z-index: 0;
+  }
+  .circle { width: 74px; height: 74px; border-radius: 50%; right: 42px; top: 46px; background: var(--mint); }
+  .diamond { width: 56px; height: 56px; left: 44px; bottom: 86px; background: var(--mustard); transform: rotate(45deg); }
+  .footer {
+    position: absolute;
+    left: 30px;
+    right: 30px;
+    bottom: 16px;
+    display: flex;
+    justify-content: space-between;
+    color: var(--muted);
+    font-size: 14px;
+    font-weight: 900;
+  }
+  .progress {
+    position: fixed;
+    left: 24px;
+    right: 24px;
+    bottom: 9px;
+    height: 10px;
+    border: 2px solid var(--ink);
+    border-radius: 999px;
+    background: white;
+    z-index: 20;
+  }
+  .progress span { display: block; width: 0; height: 100%; border-radius: 999px; background: var(--tomato); transition: width .16s ease; }
+  .overview { display: none; position: fixed; inset: 0; z-index: 50; overflow: auto; padding: 34px; background: rgba(255,244,220,.96); }
+  .overview.open { display: grid; grid-template-columns: repeat(auto-fill, minmax(220px, 1fr)); gap: 18px; }
+  .overview-card {
+    min-height: 128px;
+    text-align: left;
+    border: var(--line);
+    border-radius: 18px;
+    background: #fffdf4;
+    box-shadow: 7px 7px 0 var(--ink);
+    padding: 16px;
+    color: var(--ink);
+    cursor: pointer;
+    font: inherit;
+  }
+  .overview-card b { display: inline-grid; place-items: center; min-width: 42px; height: 34px; margin-bottom: 12px; border: 3px solid var(--ink); border-radius: 999px; background: var(--mustard); font-size: 18px; }
+  .overview-card span { display: block; font-size: 18px; line-height: 1.3; font-weight: 900; }
+  .zoom-viewer { position: fixed; inset: 0; z-index: 80; display: grid; place-items: center; padding: 34px; background: rgba(32,27,23,.42); opacity: 0; visibility: hidden; pointer-events: none; transition: opacity .16s ease, visibility .16s ease; }
+  .zoom-viewer.slide-bound {
+    inset: auto;
+    left: var(--zoom-left, 0px);
+    top: var(--zoom-top, 0px);
+    width: var(--zoom-width, 100vw);
+    height: var(--zoom-height, 100vh);
+    padding: 24px;
+    border-radius: 24px;
+    overflow: hidden;
+  }
+  .zoom-viewer.open { opacity: 1; visibility: visible; pointer-events: auto; }
+  .zoom-frame { max-width: min(94vw, 1100px); max-height: 88vh; padding: 14px; border: var(--line); border-radius: 22px; background: #fffdf4; box-shadow: 12px 12px 0 var(--ink); opacity: 0; transform: rotate(-.4deg) scale(.965); transition: opacity .16s ease, transform .18s cubic-bezier(.2,.8,.2,1); }
+  .zoom-viewer.slide-bound .zoom-frame {
+    max-width: calc(var(--zoom-width, 100vw) - 64px);
+    max-height: calc(var(--zoom-height, 100vh) - 64px);
+  }
+  .zoom-viewer.open .zoom-frame { opacity: 1; transform: rotate(-.4deg) scale(1); }
+  .zoom-frame img { display: block; max-width: calc(94vw - 42px); max-height: calc(88vh - 42px); object-fit: contain; }
+  .zoom-viewer.slide-bound .zoom-frame img {
+    max-width: calc(var(--zoom-width, 100vw) - 106px);
+    max-height: calc(var(--zoom-height, 100vh) - 106px);
+  }
+</style>
+</head>
+<body>
+<main class="deck" id="deck"></main>
+<div class="progress"><span id="bar"></span></div>
+<div class="overview" id="overview"></div>
+<div class="zoom-viewer" id="zoomViewer" aria-hidden="true"><div class="zoom-frame"><img id="zoomImage" alt=""></div></div>
+<script>
+const focusImage = "data:image/svg+xml;charset=UTF-8," + encodeURIComponent(`<svg xmlns="http://www.w3.org/2000/svg" width="900" height="560" viewBox="0 0 900 560">
+  <rect width="900" height="560" fill="#fff9ea"/>
+  <rect x="52" y="52" width="796" height="456" rx="28" fill="#fff" stroke="#201b17" stroke-width="8"/>
+  <rect x="92" y="102" width="710" height="64" rx="20" fill="#f2c84b" stroke="#201b17" stroke-width="6"/>
+  <text x="122" y="144" font-family="Microsoft YaHei, Arial" font-size="30" font-weight="800" fill="#201b17">3:4 cards mode</text>
+  <rect x="92" y="204" width="300" height="210" rx="24" fill="#8bd6af" stroke="#201b17" stroke-width="6"/>
+  <rect x="430" y="204" width="372" height="64" rx="16" fill="#f35b3f" stroke="#201b17" stroke-width="6"/>
+  <rect x="430" y="296" width="372" height="64" rx="16" fill="#fff4dc" stroke="#201b17" stroke-width="6"/>
+  <rect x="430" y="388" width="260" height="64" rx="16" fill="#fff4dc" stroke="#201b17" stroke-width="6"/>
+  <text x="124" y="310" font-family="Microsoft YaHei, Arial" font-size="34" font-weight="900" fill="#201b17">聚焦截图</text>
+</svg>`);
+const slides = [
+  {
+    section: "CARDS 01",
+    title: "封面",
+    layout: "coverVertical",
+    tag: "3:4 图文卡片",
+    headline: "长文不是压缩成<span class='accent'>短摘要</span>",
+    lead: "它应该被重写成一组读者能逐页看懂、逐页保存的知识卡片。",
+    badges: ["小亮手绘实验室", "3:4", "图文发布"]
+  },
+  {
+    section: "CARDS 02",
+    title: "核心判断",
+    layout: "quoteCard",
+    tag: "核心判断",
+    headline: "3:4 不是横版 PPT 的裁剪版",
+    lead: "横版服务口播，竖版服务阅读。比例变了，信息组织也必须变。"
+  },
+  {
+    section: "CARDS 03",
+    title: "模式差异",
+    layout: "summaryCards",
+    tag: "deck vs cards",
+    headline: "两种模式，解决两种传播场景",
+    cards: [
+      ["16:9 deck", "适合录屏、讲课、界面 walkthrough，允许口播补充上下文。"],
+      ["3:4 cards", "适合小红书、公众号配图、朋友圈图文，每页要独立可读。"]
+    ]
+  },
+  {
+    section: "CARDS 04",
+    title: "拆稿路径",
+    layout: "verticalSteps",
+    tag: "拆稿方法",
+    headline: "先改写传播路径，再排版",
+    steps: [
+      ["找钩子", "读者为什么要停下来？第一页先给明确承诺。"],
+      ["拆观点", "每张卡只讲一个观点，不把段落硬切成页面。"],
+      ["放证据", "截图、案例、步骤只服务这一页的判断。"]
+    ]
+  },
+  {
+    section: "CARDS 05",
+    title: "页面原则",
+    layout: "summaryCards",
+    tag: "页面原则",
+    headline: "每张卡都要能单独成立",
+    cards: [
+      ["标题像判断", "不要只写主题，要写这一页到底想说什么。"],
+      ["正文要收紧", "2-4 个关键点就够，手机上读起来不能累。"],
+      ["截图要聚焦", "少放全屏 UI，多截真正要看的区域。"]
+    ]
+  },
+  {
+    section: "CARDS 06",
+    title: "视觉结构",
+    layout: "stackedImage",
+    tag: "截图聚焦",
+    headline: "竖版优先从上到下阅读",
+    lead: "少用左右分栏，多用封面、观点、步骤、总结这些竖向结构。",
+    image: focusImage,
+    caption: "可悬停放大"
+  },
+  {
+    section: "CARDS 07",
+    title: "验证清单",
+    layout: "verticalSteps",
+    tag: "验收标准",
+    headline: "跑完以后看四件事",
+    steps: [
+      ["比例对", "画布是 3:4，不是横版页面被压窄。"],
+      ["能读懂", "不靠口播也能理解每页内容。"],
+      ["不拥挤", "标题、正文、卡片和页脚没有互相打架。"],
+      ["能发布", "截图清楚，文字在手机上也有阅读余量。"]
+    ]
+  },
+  {
+    section: "CARDS 08",
+    title: "下一步",
+    layout: "quoteCard",
+    tag: "下一步",
+    headline: "先把 3:4 cards 做稳，再谈更多比例",
+    lead: "16:9 负责讲解，3:4 负责图文。两个模式清楚，skill 才不会跑偏。"
+  }
+];
+
+const deck = document.querySelector("#deck");
+const bar = document.querySelector("#bar");
+const overview = document.querySelector("#overview");
+const zoomViewer = document.querySelector("#zoomViewer");
+const zoomImage = document.querySelector("#zoomImage");
+const zoomFrame = document.querySelector(".zoom-frame");
+let index = 0;
+let zoomCloseTimer = 0;
+
+function escapeHTML(value) {
+  return String(value ?? "").replace(/[&<>"']/g, char => ({
+    "&": "&amp;",
+    "<": "&lt;",
+    ">": "&gt;",
+    '"': "&quot;",
+    "'": "&#39;"
+  }[char]));
+}
+
+function renderCards(cards = []) {
+  return `<div class="card-grid">${cards.map(card => `<div class="info-card"><b>${escapeHTML(card[0])}</b><p>${escapeHTML(card[1])}</p></div>`).join("")}</div>`;
+}
+
+function renderSteps(steps = []) {
+  return `<div class="stepper">${steps.map((step, n) => `<div class="step-row"><span class="step-badge">${n + 1}</span><div><b>${escapeHTML(step[0])}</b><p>${escapeHTML(step[1])}</p></div></div>`).join("")}</div>`;
+}
+
+function renderShot(image, caption = "") {
+  return `<div class="shot"><img src="${image}" alt=""><span class="caption">${caption}</span></div>`;
+}
+
+function renderSlide(s, i) {
+  let body = "";
+  if (s.layout === "coverVertical") {
+    body = `<div class="cover"><div><span class="mark">${s.tag}</span><h2>${s.headline}</h2><p class="lead">${s.lead}</p><div class="badge-row">${s.badges.map(b => `<span class="badge">${b}</span>`).join("")}</div></div><div></div><div class="visual-note"><div class="mini-board"><div class="mini">封面</div><div class="mini">观点</div><div class="mini">步骤</div><div class="mini">总结</div></div></div></div>`;
+  } else if (s.layout === "quoteCard") {
+    body = `<div class="quote-card"><div><span class="quote-mark">“</span><span class="mark">${s.tag}</span><h2>${s.headline}</h2><p class="lead">${s.lead}</p></div></div>`;
+  } else if (s.layout === "verticalSteps") {
+    body = `<div class="vertical-card"><div><span class="mark">${s.tag}</span><h2>${s.headline}</h2>${renderSteps(s.steps)}</div></div>`;
+  } else if (s.layout === "stackedImage") {
+    body = `<div class="vertical-card"><div><span class="mark">${s.tag}</span><h2>${s.headline}</h2><p class="lead">${s.lead}</p><div style="margin-top:26px">${renderShot(s.image, s.caption)}</div></div></div>`;
+  } else {
+    body = `<div class="vertical-card"><div><span class="mark">${s.tag}</span><h2>${s.headline}</h2>${renderCards(s.cards)}</div></div>`;
+  }
+  return `<section class="slide" data-title="${s.title}"><span class="shape circle"></span><span class="shape diamond"></span><div class="pin">${s.section}</div>${body}<div class="footer"><span>Xiaoliang 3:4 Cards Demo</span><span>${i + 1} / ${slides.length}</span></div></section>`;
+}
+
+deck.innerHTML = slides.map(renderSlide).join("");
+const slideEls = [...document.querySelectorAll(".slide")];
+overview.innerHTML = slides.map((slide, i) => `<button class="overview-card" type="button" data-index="${i}"><b>${i + 1}</b><span>${slide.title}</span></button>`).join("");
+overview.querySelectorAll(".overview-card").forEach(button => {
+  button.addEventListener("click", () => {
+    overview.classList.remove("open");
+    go(Number(button.dataset.index));
+  });
+});
+
+function bindImageZoom() {
+  function applyZoomBounds() {
+    zoomViewer.classList.add("slide-bound");
+    const rect = slideEls[index].getBoundingClientRect();
+    zoomViewer.style.setProperty("--zoom-left", `${rect.left}px`);
+    zoomViewer.style.setProperty("--zoom-top", `${rect.top}px`);
+    zoomViewer.style.setProperty("--zoom-width", `${rect.width}px`);
+    zoomViewer.style.setProperty("--zoom-height", `${rect.height}px`);
+  }
+  document.querySelectorAll(".shot img").forEach(image => {
+    image.addEventListener("mouseenter", () => {
+      clearTimeout(zoomCloseTimer);
+      applyZoomBounds();
+      zoomImage.src = image.currentSrc || image.src;
+      zoomViewer.classList.add("open");
+      zoomViewer.setAttribute("aria-hidden", "false");
+    });
+  });
+  zoomFrame.addEventListener("mouseenter", () => clearTimeout(zoomCloseTimer));
+  zoomViewer.addEventListener("mousemove", event => {
+    if (zoomViewer.classList.contains("open") && !zoomFrame.contains(event.target)) {
+      clearTimeout(zoomCloseTimer);
+      zoomCloseTimer = setTimeout(() => {
+        zoomViewer.classList.remove("open");
+        zoomViewer.setAttribute("aria-hidden", "true");
+      }, 110);
+    }
+  });
+  zoomViewer.addEventListener("click", () => {
+    clearTimeout(zoomCloseTimer);
+    zoomViewer.classList.remove("open");
+    zoomViewer.setAttribute("aria-hidden", "true");
+  });
+}
+
+function readHashIndex() {
+  const match = location.hash.match(/^#\/(\d+)$/);
+  if (!match) return 0;
+  return Math.max(0, Math.min(slideEls.length - 1, Number(match[1]) - 1));
+}
+
+function render() {
+  slideEls.forEach((slide, i) => slide.classList.toggle("active", i === index));
+  bar.style.width = `${((index + 1) / slideEls.length) * 100}%`;
+  history.replaceState(null, "", `${location.pathname}${location.search}#/${index + 1}`);
+}
+
+function go(next) {
+  index = Math.max(0, Math.min(slideEls.length - 1, next));
+  render();
+}
+
+document.addEventListener("keydown", event => {
+  if (event.key === "ArrowRight" || event.key === " " || event.key === "PageDown") go(index + 1);
+  if (event.key === "ArrowLeft" || event.key === "PageUp") go(index - 1);
+  if (event.key === "Home") go(0);
+  if (event.key === "End") go(slideEls.length - 1);
+  if (event.key.toLowerCase() === "o") overview.classList.toggle("open");
+  if (event.key.toLowerCase() === "f") document.documentElement.requestFullscreen?.();
+  if (event.key === "Escape") {
+    overview.classList.remove("open");
+    clearTimeout(zoomCloseTimer);
+    zoomViewer.classList.remove("open");
+    zoomViewer.setAttribute("aria-hidden", "true");
+  }
+});
+
+window.addEventListener("hashchange", () => {
+  index = readHashIndex();
+  render();
+});
+
+let lastWheelAt = 0;
+document.addEventListener("wheel", event => {
+  if (overview.classList.contains("open")) return;
+  const now = Date.now();
+  if (now - lastWheelAt < 520 || Math.abs(event.deltaY) < 18) return;
+  lastWheelAt = now;
+  go(index + (event.deltaY > 0 ? 1 : -1));
+}, { passive: true });
+
+index = readHashIndex();
+bindImageZoom();
+render();
+</script>
+</body>
+</html>
