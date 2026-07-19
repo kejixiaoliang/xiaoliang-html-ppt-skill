@@ -29,6 +29,9 @@ compileScript(templatePath, template);
 compileScript(demoPath, demo);
 
 check("template defaults to aspect-16x9", template.includes('class="style-xiaoliang-lab aspect-16x9"'));
+check("template has slide data start marker", template.includes("// __SLIDE_DATA_START__"));
+check("template has slide data end marker", template.includes("// __SLIDE_DATA_END__"));
+check("template marker order is valid", template.indexOf("// __SLIDE_DATA_START__") < template.indexOf("// __SLIDE_DATA_END__"));
 check("template supports mode=cards", template.includes('params.get("mode") === "cards"'));
 check("template supports aspect=3x4", template.includes('params.get("aspect") === "3x4"'));
 check("template removes alternate style query switching", !template.includes(removedStyleParam) && !template.includes(removedStyleQuery));

@@ -177,6 +177,7 @@
 <div class="overview" id="overview"></div>
 <div class="zoom-viewer" id="zoomViewer" aria-hidden="true"><div class="zoom-frame"><img id="zoomImage" alt=""></div></div>
 <script>
+// __SLIDE_DATA_START__
 const deckSlides = [
   {
     section: "小亮实验室",
@@ -258,6 +259,7 @@ const cardSlides = [
     ]
   }
 ];
+// __SLIDE_DATA_END__
 const params = new URLSearchParams(location.search);
 if (params.get("mode") === "cards" || params.get("aspect") === "3x4") {
   document.body.classList.remove("aspect-16x9");
