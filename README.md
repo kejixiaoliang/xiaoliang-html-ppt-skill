@@ -190,6 +190,13 @@ node scripts\validate-generated-html.mjs <生成的HTML路径> --mode deck --min
 node scripts\validate-generated-html.mjs <生成的HTML路径> --mode cards --min-slides 8
 ```
 
+如果本机有 Playwright 包和 Chrome/Edge，可以继续做真实浏览器检查：
+
+```powershell
+node scripts\browser-check-generated.mjs <生成的HTML路径> --mode deck --expected-slides 26
+node scripts\browser-check-generated.mjs <生成的HTML路径> --mode cards --expected-slides 22
+```
+
 生成 HTML PPT 后建议用浏览器检查：
 
 - 图片是否全部加载。
