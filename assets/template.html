@@ -109,10 +109,11 @@
   .check-row { display: grid; grid-template-columns: 34px 1fr; gap: 12px; align-items: start; padding: 14px 16px; border: 3px solid var(--ink); border-radius: 16px; background: #fff; box-shadow: 5px 5px 0 var(--ink); font-size: 21px; line-height: 1.35; font-weight: 850; }
   .check-row::before { content: "✓"; display: grid; place-items: center; width: 30px; height: 30px; border: 3px solid var(--ink); border-radius: 50%; background: var(--green); font-weight: 950; }
   .vertical-card { height: 100%; display: grid; align-content: center; gap: 22px; }
-  .vertical-cover { height: 100%; display: grid; grid-template-rows: auto 1fr auto; gap: 22px; }
+  .vertical-cover { height: 100%; display: grid; grid-template-rows: auto minmax(0, 1fr); gap: 28px; }
   .vertical-cover h2 { font-size: 58px; line-height: 1; }
-  .cover-visual { align-self: end; }
-  .cover-visual .shot img { max-height: 360px; }
+  .cover-visual { min-height: 0; align-self: start; display: grid; place-items: center; }
+  .cover-visual .shot { width: 100%; }
+  .cover-visual .shot img { height: clamp(480px, 48vh, 700px); max-height: none; object-fit: cover; object-position: center; }
   .quote-card { height: 100%; display: grid; place-items: center; text-align: center; }
   .quote-mark { display: inline-grid; place-items: center; width: 64px; height: 64px; margin: 0 auto 18px; border: var(--line); border-radius: 50%; background: var(--mustard); box-shadow: 6px 6px 0 var(--ink); font-size: 42px; font-weight: 950; }
   .quote-card h2 { margin-top: 0; font-size: 54px; line-height: 1.05; }
@@ -314,7 +315,7 @@ function renderSlide(s, i) {
   const shot = renderShot(s.image, s.caption);
   let body = "";
   if (s.layout === "coverVertical") {
-    body = `<div class="vertical-cover"><div><span class="mark">${s.tag}</span><h2>${s.headline}</h2>${s.lead ? `<p class="lead">${s.lead}</p>` : ""}</div><div></div><div class="cover-visual">${shot}</div></div>`;
+    body = `<div class="vertical-cover"><div><span class="mark">${s.tag}</span><h2>${s.headline}</h2>${s.lead ? `<p class="lead">${s.lead}</p>` : ""}</div><div class="cover-visual">${shot}</div></div>`;
   } else if (s.layout === "quoteCard") {
     body = `<div class="quote-card"><div><span class="quote-mark">“</span><span class="mark">${s.tag}</span><h2>${s.headline}</h2>${s.lead ? `<p class="lead">${s.lead}</p>` : ""}</div></div>`;
   } else if (s.layout === "stackedImage") {

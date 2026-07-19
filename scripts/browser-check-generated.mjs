@@ -65,6 +65,18 @@ const report = await page.evaluate(async () => {
     const rect = slide.getBoundingClientRect();
     return slide.scrollWidth > Math.ceil(rect.width) + 2 || slide.scrollHeight > Math.ceil(rect.height) + 2;
   }).map(slide => slide.dataset.title);
+  let coverGapRatio = null;
+  const cover = active?.querySelector(".vertical-cover");
+  const coverVisual = active?.querySelector(".cover-visual");
+  if (cover && coverVisual) {
+    const coverChildren = [...cover.children];
+    const intro = coverChildren.find(child => !child.classList.contains("cover-visual"));
+    if (intro) {
+      const introRect = intro.getBoundingClientRect();
+      const visualRect = coverVisual.getBoundingClientRect();
+      coverGapRatio = Math.round(((visualRect.top - introRect.bottom) / slideRect.height) * 1000) / 1000;
+    }
+  }
   return {
     slideCount: slides.length,
     activeTitle: active?.dataset.title,
@@ -72,7 +84,8 @@ const report = await page.evaluate(async () => {
     slideRatio: Math.round((slideRect.width / slideRect.height) * 1000) / 1000,
     imageCount: images.length,
     missingImages,
-    overflowingSlides
+    overflowingSlides,
+    coverGapRatio
   };
 });
 
@@ -105,7 +118,8 @@ const failed = [
   !afterNext,
   !overviewOpen,
   !zoomOpened,
-  mode === "cards" && !zoomBound
+  mode === "cards" && !zoomBound,
+  mode === "cards" && report.coverGapRatio !== null && report.coverGapRatio > 0.18
 ].some(Boolean);
 
 if (failed) process.exit(1);

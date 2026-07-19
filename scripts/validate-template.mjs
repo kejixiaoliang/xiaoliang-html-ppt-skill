@@ -52,6 +52,8 @@ check("template blocks wheel while zoom is open", template.includes('zoomViewer.
 check("template supports pointer swipe navigation", template.includes('deck.addEventListener("pointerdown"') && template.includes('deck.addEventListener("pointerup"'));
 check("template escapes card text", template.includes("${escapeHTML(card[0])}") && template.includes("${escapeHTML(card[1])}"));
 check("template escapes step text", template.includes("${escapeHTML(step[0])}") && template.includes("${escapeHTML(step[1])}"));
+check("coverVertical has no spacer row", !template.includes("grid-template-rows: auto 1fr auto") && !template.includes("<div></div><div class=\"cover-visual\""));
+check("coverVertical uses poster image treatment", template.includes(".cover-visual .shot img { height: clamp(480px, 48vh, 700px);") && template.includes("object-fit: cover"));
 check("demo uses coverVertical layout", demo.includes('layout: "coverVertical"'));
 check("demo uses quoteCard layout", demo.includes('layout: "quoteCard"'));
 check("demo uses stackedImage layout", demo.includes('layout: "stackedImage"'));
