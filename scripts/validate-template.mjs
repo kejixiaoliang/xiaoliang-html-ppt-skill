@@ -47,7 +47,7 @@ check("template has stackedImage layout", template.includes('s.layout === "stack
 check("template has verticalSteps layout", template.includes('s.layout === "verticalSteps"'));
 check("template has hover zoom binding", template.includes("function bindImageZoom()"));
 check("template bounds cards zoom to slide", template.includes("zoomViewer.classList.toggle(\"slide-bound\", isCards)") && template.includes("--zoom-width"));
-check("template closes zoom before slide navigation", template.includes("function closeZoom()") && template.includes("closeZoom();\n  render();"));
+check("template closes zoom before slide navigation", template.includes("function closeZoom()") && /closeZoom\(\);\r?\n  render\(\);/.test(template));
 check("template blocks wheel while zoom is open", template.includes('zoomViewer.classList.contains("open")) return;'));
 check("template supports pointer swipe navigation", template.includes('deck.addEventListener("pointerdown"') && template.includes('deck.addEventListener("pointerup"'));
 check("template escapes card text", template.includes("${escapeHTML(card[0])}") && template.includes("${escapeHTML(card[1])}"));
