@@ -20,7 +20,7 @@
 
 适合小红书图文、公众号配图、朋友圈图文、知识卡片和逐页发布。
 
-![3:4 封面卡预览](docs/assets/readme/cards-cover.png)
+![3:4 封面卡预览](docs/assets/readme/cards-cover-fixed.png)
 
 ![3:4 案例卡预览](docs/assets/readme/cards-case.png)
 
