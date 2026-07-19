@@ -183,6 +183,13 @@ py C:\Users\kangt\.codex\skills\.system\skill-creator\scripts\quick_validate.py 
 node scripts\validate-template.mjs
 ```
 
+生成具体 HTML 后，可以使用通用静态验证脚本：
+
+```powershell
+node scripts\validate-generated-html.mjs <生成的HTML路径> --mode deck --min-slides 20
+node scripts\validate-generated-html.mjs <生成的HTML路径> --mode cards --min-slides 8
+```
+
 生成 HTML PPT 后建议用浏览器检查：
 
 - 图片是否全部加载。
