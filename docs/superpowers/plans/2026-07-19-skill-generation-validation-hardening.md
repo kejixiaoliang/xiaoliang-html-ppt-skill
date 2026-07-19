@@ -1,6 +1,6 @@
-# Skill Generation Validation Hardening Implementation Plan
+﻿# Skill Generation Validation Hardening Implementation Plan
 
-> **For agentic workers:** REQUIRED SUB-SKILL: Use superpowers:subagent-driven-development (recommended) or superpowers:executing-plans to implement this plan task-by-task. Steps use checkbox (`- [ ]`) syntax for tracking.
+> **For agentic workers:** REQUIRED SUB-SKILL: Use superpowers:subagent-driven-development (recommended) or superpowers:executing-plans to implement this plan task-by-task. Steps use checkbox (`- [x]`) syntax for tracking.
 
 **Goal:** Harden `xiaoliang-html-ppt-skill` so future 16:9 decks and 3:4 cards can be generated from the template, statically validated, and browser-checked without repeating the fragile issues found during the July 19 article test.
 
@@ -31,7 +31,7 @@
 - Produces: A stable replaceable block containing only `const deckSlides = [...]` and `const cardSlides = [...]`.
 - Consumes: Existing template variables `deckSlides`, `cardSlides`, `params`, and `slides`.
 
-- [ ] **Step 1: Add slide-data markers around the template sample data**
+- [x] **Step 1: Add slide-data markers around the template sample data**
 
 Modify `assets/template.html` so the data block starts exactly like this:
 
@@ -50,7 +50,7 @@ const cardSlides = [
 const params = new URLSearchParams(location.search);
 ```
 
-- [ ] **Step 2: Add template validation checks for the markers**
+- [x] **Step 2: Add template validation checks for the markers**
 
 In `scripts/validate-template.mjs`, add:
 
@@ -60,7 +60,7 @@ check("template has slide data end marker", template.includes("// __SLIDE_DATA_E
 check("template marker order is valid", template.indexOf("// __SLIDE_DATA_START__") < template.indexOf("// __SLIDE_DATA_END__"));
 ```
 
-- [ ] **Step 3: Run template validation**
+- [x] **Step 3: Run template validation**
 
 Run:
 
@@ -70,7 +70,7 @@ node scripts\validate-template.mjs
 
 Expected: all existing checks pass plus the new marker checks.
 
-- [ ] **Step 4: Commit**
+- [x] **Step 4: Commit**
 
 ```powershell
 git add assets/template.html scripts/validate-template.mjs
@@ -91,7 +91,7 @@ git commit -m "Add stable slide data anchors"
 - Output: `PASS ...` lines, then `Generated HTML static validation passed.`
 - Exit code: `0` on success, `1` on validation failure.
 
-- [ ] **Step 1: Create the validator script**
+- [x] **Step 1: Create the validator script**
 
 Create `scripts/validate-generated-html.mjs` with:
 
@@ -178,7 +178,7 @@ if (failed.length) {
 console.log("\nGenerated HTML static validation passed.");
 ```
 
-- [ ] **Step 2: Add README usage**
+- [x] **Step 2: Add README usage**
 
 Add this under `开发与验证` in `README.md`:
 
@@ -191,7 +191,7 @@ node scripts\validate-generated-html.mjs <生成的HTML路径> --mode cards --mi
 ```
 ```
 
-- [ ] **Step 3: Add Skill checklist requirement**
+- [x] **Step 3: Add Skill checklist requirement**
 
 In `SKILL.md` Done Checklist, add:
 
@@ -199,7 +199,7 @@ In `SKILL.md` Done Checklist, add:
 - 已用 `scripts/validate-generated-html.mjs` 检查页数、图片路径和核心交互代码。
 ```
 
-- [ ] **Step 4: Add authoring workflow verification note**
+- [x] **Step 4: Add authoring workflow verification note**
 
 In `references/authoring-workflow.md`, add:
 
@@ -207,7 +207,7 @@ In `references/authoring-workflow.md`, add:
 生成 HTML 后先跑 `scripts/validate-generated-html.mjs`，再做浏览器检查。不要只靠肉眼确认页面存在。
 ```
 
-- [ ] **Step 5: Run checks**
+- [x] **Step 5: Run checks**
 
 Run:
 
@@ -218,7 +218,7 @@ $env:PYTHONUTF8='1'; py C:\Users\kangt\.codex\skills\.system\skill-creator\scrip
 
 Expected: template checks pass and `Skill is valid!`.
 
-- [ ] **Step 6: Commit**
+- [x] **Step 6: Commit**
 
 ```powershell
 git add scripts/validate-generated-html.mjs README.md SKILL.md references/authoring-workflow.md
@@ -238,7 +238,7 @@ git commit -m "Add generated HTML static validator"
 - Behavior: tries installed Chrome first, then Edge; uses Playwright package if available in local dependency resolution.
 - Output: JSON report with `slideCount`, `slideRatio`, `missingImages`, `overflowingSlides`, `overviewOpen`, `zoomOpened`, and `zoomBound`.
 
-- [ ] **Step 1: Create browser validation script**
+- [x] **Step 1: Create browser validation script**
 
 Create `scripts/browser-check-generated.mjs` with:
 
@@ -356,7 +356,7 @@ const failed = [
 if (failed) process.exit(1);
 ```
 
-- [ ] **Step 2: Document browser validation**
+- [x] **Step 2: Document browser validation**
 
 Add to `README.md`:
 
@@ -369,7 +369,7 @@ node scripts\browser-check-generated.mjs <生成的HTML路径> --mode cards --ex
 ```
 ```
 
-- [ ] **Step 3: Update interaction verification guidance**
+- [x] **Step 3: Update interaction verification guidance**
 
 Add to `references/interactions.md`:
 
@@ -377,7 +377,7 @@ Add to `references/interactions.md`:
 真实浏览器检查优先使用 `scripts/browser-check-generated.mjs`。它会验证图片加载、比例、溢出、概览、hash、hover zoom；`cards` 模式还会验证 zoom 是否被限制在 3:4 页面内。
 ```
 
-- [ ] **Step 4: Run checks**
+- [x] **Step 4: Run checks**
 
 Run:
 
@@ -388,7 +388,7 @@ $env:PYTHONUTF8='1'; py C:\Users\kangt\.codex\skills\.system\skill-creator\scrip
 
 Expected: template checks pass and `Skill is valid!`.
 
-- [ ] **Step 5: Commit**
+- [x] **Step 5: Commit**
 
 ```powershell
 git add scripts/browser-check-generated.mjs README.md references/interactions.md
@@ -408,7 +408,7 @@ git commit -m "Add optional browser generated HTML check"
 - Produces Skill instruction: read `references/testing-lessons.md` when generating or validating real decks/cards after article tests.
 - Produces validation check: `README.md` and `SKILL.md` mention `testing-lessons.md`.
 
-- [ ] **Step 1: Create lessons reference**
+- [x] **Step 1: Create lessons reference**
 
 Create `references/testing-lessons.md` with:
 
@@ -447,7 +447,7 @@ Create `references/testing-lessons.md` with:
 - 额外导出 1-2 张预览图人工检查。
 ```
 
-- [ ] **Step 2: Link lessons from Skill**
+- [x] **Step 2: Link lessons from Skill**
 
 In `SKILL.md`, add `references/testing-lessons.md` to the implementation starting point:
 
@@ -457,7 +457,7 @@ In `SKILL.md`, add `references/testing-lessons.md` to the implementation startin
 
 Renumber the following items.
 
-- [ ] **Step 3: Link lessons from README**
+- [x] **Step 3: Link lessons from README**
 
 Add to `README.md` under `开发与验证`:
 
@@ -465,7 +465,7 @@ Add to `README.md` under `开发与验证`:
 真实生成遇到的问题和处理方式记录在 `references/testing-lessons.md`，后续修改 Skill 时应先读它。
 ```
 
-- [ ] **Step 4: Add template validation checks**
+- [x] **Step 4: Add template validation checks**
 
 In `scripts/validate-template.mjs`, add:
 
@@ -476,7 +476,7 @@ check("skill links testing lessons", skill.includes("references/testing-lessons.
 check("readme links testing lessons", readme.includes("references/testing-lessons.md"));
 ```
 
-- [ ] **Step 5: Run checks**
+- [x] **Step 5: Run checks**
 
 Run:
 
@@ -487,7 +487,7 @@ $env:PYTHONUTF8='1'; py C:\Users\kangt\.codex\skills\.system\skill-creator\scrip
 
 Expected: template checks pass and `Skill is valid!`.
 
-- [ ] **Step 6: Commit**
+- [x] **Step 6: Commit**
 
 ```powershell
 git add references/testing-lessons.md SKILL.md README.md scripts/validate-template.mjs
@@ -515,3 +515,4 @@ Expected:
 - Spec coverage: Tasks cover stable template replacement, generated HTML static validation, browser validation, and real-test lesson documentation.
 - Placeholder scan: No `TBD`, `TODO`, or unspecified implementation steps remain.
 - Type consistency: Script CLIs consistently use `<html-file> --mode deck|cards`; browser validation uses `--expected-slides`; static validation uses `--min-slides`.
+
