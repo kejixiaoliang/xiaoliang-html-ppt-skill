@@ -197,6 +197,8 @@ node scripts\browser-check-generated.mjs <生成的HTML路径> --mode deck --exp
 node scripts\browser-check-generated.mjs <生成的HTML路径> --mode cards --expected-slides 22
 ```
 
+真实生成遇到的问题和处理方式记录在 `references/testing-lessons.md`，后续修改 Skill 时应先读它。
+
 生成 HTML PPT 后建议用浏览器检查：
 
 - 图片是否全部加载。

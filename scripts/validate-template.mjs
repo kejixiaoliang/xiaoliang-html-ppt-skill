@@ -20,6 +20,8 @@ const templatePath = "assets/template.html";
 const demoPath = "projects/xiaoliang-3x4-cards-demo/index.html";
 const template = read(templatePath);
 const demo = read(demoPath);
+const skill = read("SKILL.md");
+const readme = read("README.md");
 const removedStyleParam = "style" + "Param";
 const removedStyleQuery = "params.get(" + '"style"' + ")";
 const removedRoundedClass = "style-" + "roun" + "ded" + "-mem" + "phis";
@@ -29,6 +31,8 @@ compileScript(templatePath, template);
 compileScript(demoPath, demo);
 
 check("template defaults to aspect-16x9", template.includes('class="style-xiaoliang-lab aspect-16x9"'));
+check("skill links testing lessons", skill.includes("references/testing-lessons.md"));
+check("readme links testing lessons", readme.includes("references/testing-lessons.md"));
 check("template has slide data start marker", template.includes("// __SLIDE_DATA_START__"));
 check("template has slide data end marker", template.includes("// __SLIDE_DATA_END__"));
 check("template marker order is valid", template.indexOf("// __SLIDE_DATA_START__") < template.indexOf("// __SLIDE_DATA_END__"));
