@@ -1,138 +1,90 @@
-# Style Presets
+# 小亮实验室风格
 
-Use this file when the user specifies a visual style or asks what styles are available. Keep the selected style consistent across the whole deck: palette, title treatment, cards, stickers, buttons, progress bar, image frames, and hover states.
+这个 Skill 的公开版只保留一种视觉风格：**小亮实验室**。当用户询问可用风格、指定风格，或在生成前需要确认视觉方向时，都以本文件为准。
 
-## Trigger Names
+## 触发名称
 
-| User-facing name | Aliases | Best for |
-|---|---|---|
-| 小亮手绘实验室 | `xiaoliang-lab`, `default`, `手绘实验室` | Warm creator tutorials, AI tool explanations, GitHub/workflow teaching |
-| 圆润孟菲斯 | `rounded-memphis`, `candy-memphis`, `软糖孟菲斯` | Friendly brand stories, playful creator intros, lighter teaching decks |
-| 粗黑孟菲斯 | `bold-memphis`, `poster-memphis`, `爆款孟菲斯` | High-energy launches, bold concept explainers, dramatic visual storytelling |
+| 用户说法 | 处理方式 |
+|---|---|
+| 小亮实验室 | 使用唯一默认风格 |
+| 小亮手绘实验室 | 使用唯一默认风格 |
+| 小亮风格 | 使用唯一默认风格 |
+| 手绘实验室 | 使用唯一默认风格 |
+| xiaoliang-lab | 使用唯一默认风格 |
+| default | 使用唯一默认风格 |
 
-When the user says only "孟菲斯", ask a short clarification if possible. If acting autonomously, choose `圆润孟菲斯` for friendly/brand/creator topics and `粗黑孟菲斯` for punchy/viral/announcement topics.
+如果用户要求其它视觉风格，先说明当前公开版只保留“小亮实验室”，然后继续用小亮实验室完成任务。不要临时启用隐藏风格，也不要在模板里加入其它 body class。
 
-## 小亮手绘实验室
+## 风格定位
 
-The default style. It is warm, practical, notebook-like, and easy to narrate.
+小亮实验室不是商务模板，也不是酷炫 AI 首屏。它像一份创作者的实验笔记：温暖、手绘、纸感、稍微有点玩心，但核心是把工具、概念和操作讲清楚。
 
-Use:
+适合：
 
-- Cream paper background with subtle grid texture.
-- Strong but not aggressive ink borders, 3-4px.
-- Tomato red, mustard yellow, mint green, pale peach.
-- Sticker labels, pill tags, hand-drawn image frames.
-- Slight rotations and offset shadows.
-- Direct Chinese copy that sounds like a creator explaining things to viewers.
+- AI 工具讲解。
+- GitHub / 编程 / 工作流教程。
+- 产品功能拆解。
+- 公众号长文改 PPT。
+- 小红书或公众号知识卡片。
+- 有大量界面截图的教学内容。
 
-Avoid:
+不适合：
 
-- Dense decoration that competes with screenshots.
-- Dark cyber or blue-purple AI visual language.
-- Marketing landing-page composition.
+- 极简商务汇报。
+- 深色赛博风页面。
+- 蓝紫渐变 AI 海报。
+- 只有视觉冲击、没有教学路径的静态海报。
 
-## 圆润孟菲斯
+## 视觉语言
 
-Inspired by the MIMO/CHUNKY reference: rounded, candy-colored, chunky, playful, and friendly.
+使用：
 
-This style must look obviously different from the default Xiaoliang lab style. It should feel like a toy-like creative playground, not just the default deck with brighter accents.
+- 奶油纸、暖灰纸、淡黄纸、浅桃色背景。
+- 轻微笔记本/网格纹理。
+- 3-4px 深色手绘线框。
+- 错位黑色投影。
+- 贴纸标签、胶囊标签、圆形编号。
+- 番茄红、芥末黄、薄荷绿、浅桃、墨黑作为点缀。
+- 16-26px 圆角卡片。
+- 少量轻微旋转，让页面有手作感。
 
-Use:
+避免：
 
-- Body class: `style-rounded-memphis`.
-- Cream background with a visible but light 60px grid.
-- Very bright accents: hot pink `#FF2D78`, yellow `#FFE500`, green `#00E676`, cyan `#00D4FF`, orange `#FF6D00`, lime `#C6FF00`.
-- Rounded chunky cards: 22-30px radius, 4-5px black borders, 7-10px offset shadows.
-- Friendly rounded font stack. If web fonts are unavailable, use `Trebuchet MS`, `Microsoft YaHei`, `PingFang SC`, Arial, sans-serif.
-- Hero/title treatment: colored highlight blocks behind key words, rounded corners, small rotation. Avoid plain black text-only headings.
-- Bubble badges, pill labels, sticker buttons, playful star/circle/triangle/diamond shapes.
-- At least 1-2 visible candy geometric decorations per non-screenshot-heavy slide.
-- Soft bounce/drift/hover movement, but keep screenshot readability first.
+- 大面积蓝紫渐变。
+- 黑色或深蓝仪表盘。
+- 玻璃拟态、发光边框、科幻网格。
+- 装饰压过截图本身。
+- 用英文大标题替代中文教学表达。
 
-Slide adaptation:
+## 文案语气
 
-- Titles can use large chunky words with colored highlight blocks.
-- Cards should feel like soft toy blocks rather than sharp posters: large radius, colorful top strips, friendly pill labels.
-- Image frames should be big, rounded, and cheerful; use rounded screenshot corners and a sticker caption.
-- Use stacked colorful blocks or vertical steppers to explain workflows.
-- Prefer 2-column layouts with generous breathing room. Avoid dense 4-column grids unless each card has very little text.
+全部提示词、说明和页面文案优先使用中文。必要的代码、快捷键、URL 参数、文件名、布局名可以保留英文。
 
-Minimum visual checklist:
+好的文案像创作者在解释一个真实问题：
 
-- [ ] Background grid is 60px and visible.
-- [ ] Title has at least one candy highlight block.
-- [ ] Cards/shot frames are clearly rounded and chunky.
-- [ ] Palette includes at least pink/yellow/cyan/green on the slide or section.
-- [ ] Decorations are rounded/playful, not sharp poster marks.
+- 先告诉观众“为什么要看这一页”。
+- 再给清楚的判断。
+- 最后落到具体界面、动作或下一步。
 
-Avoid:
+避免空话：
 
-- Too many floating shapes on image-heavy teaching slides.
-- Tiny screenshots beside oversized decoration.
-- Aggressive text shadows that reduce Chinese readability.
+- “提升效率”
+- “方便协作”
+- “优化体验”
+- “增强生产力”
 
-## 粗黑孟菲斯
+改成具体表达：
 
-Inspired by the DeepSeek reference: high-contrast, loud, poster-like, thick black borders, and strong Memphis shapes.
+- “PR 页面会把新增和删除的行分开标色，适合快速检查改动范围。”
+- “Settings > Pages 里选好分支和目录后，GitHub 会生成可访问的 github.io 地址。”
+- “3:4 图文卡不要塞完整桌面截图，优先裁切到读者需要看的按钮或区域。”
 
-This style must look like a loud poster deck. If it still feels like the default warm notebook, the style has failed.
+## 页面检查清单
 
-Use:
-
-- Body class: `style-bold-memphis`.
-- Warm beige grid background with stronger contrast than the default.
-- Thick black borders: 5-6px on primary cards, screenshots, buttons, and labels.
-- Heavy black shadows: 8-14px.
-- Bright poster colors: yellow `#ffde17`, pink `#ff6b9d`, cyan `#00d4ff`, green `#7bed7b`, orange `#ff8a5c`, purple `#b388ff`.
-- Big heavy headings, uppercase English labels where appropriate, thick stroke or poster shadow on short headings.
-- Bold geometric decorations: stars, circles, triangles, diamonds, dot patterns, zigzags.
-- Pressable poster buttons/cards with slight rotation and tactile hover/active states.
-
-Slide adaptation:
-
-- Use this when the deck needs momentum and punch.
-- Titles can be more slogan-like and high-impact.
-- Cards should be bigger and fewer per slide: 2-3 strong blocks beat 6 small blocks.
-- Screenshots should sit in thick poster frames, often with red/yellow callout strips.
-- Use asymmetric composition: big screenshot or big title, not evenly polite cards everywhere.
-- Use dot/stripe/star decorations in corners, but keep dense screenshot centers clean.
-
-Minimum visual checklist:
-
-- [ ] Borders are visibly thicker than default.
-- [ ] Shadows are heavy and poster-like.
-- [ ] Title treatment uses stroke/shadow or high-impact color blocking.
-- [ ] There is at least one bold Memphis shape: star, dot pattern, stripe, triangle, or diamond.
-- [ ] Layout uses fewer, larger blocks rather than many small polite cards.
-
-Avoid:
-
-- Applying large text shadows to long Chinese paragraphs.
-- Making every slide equally loud; alternate high-impact slides with calmer screenshot walkthrough slides.
-- Overloading the frame with decorations around dense UI screenshots.
-
-## Template Implementation Notes
-
-The bundled `assets/template.html` includes body classes for these styles:
-
-```html
-<body class="style-xiaoliang-lab">
-<body class="style-rounded-memphis">
-<body class="style-bold-memphis">
-```
-
-When generating a deck, set the body class to the selected style and then adjust slide data/layouts. Do not merely mention a style in text; the CSS, card geometry, title treatment, and decorations must change visibly.
-
-## Shared Style Requirements
-
-All styles must still satisfy the core HTML PPT requirements:
-
-- 16:9 `deck` slide stage and 3:4 `cards` slide stage.
-- Keyboard, wheel, overview, fullscreen, hash links.
-- Hover zoom for screenshots.
-- In 3:4 `cards`, hover zoom stays inside the active slide frame.
-- Screenshot frames wrap the original image ratio; avoid fixed-height frames that create large blank areas.
-- Steps beside screenshots use vertical steppers when Chinese text is long.
-- Image placement must be instructional, not decorative.
-- Text must not overflow.
-- Browser verification before final response.
+- [ ] 页面第一眼是暖纸、手绘线框、错位投影，而不是通用网页模板。
+- [ ] 主标题是中文判断句或清晰承诺。
+- [ ] 截图足够大，观众能知道该看哪里。
+- [ ] 标签、编号和强调色服务于教学路径。
+- [ ] 每页只讲一个主要点。
+- [ ] 3:4 卡片能独立阅读。
+- [ ] 没有其它风格名称、入口或 body class。

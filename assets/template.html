@@ -3,7 +3,7 @@
 <head>
 <meta charset="utf-8">
 <meta name="viewport" content="width=device-width, initial-scale=1">
-<title>Xiaoliang HTML PPT Skill Template</title>
+<title>小亮实验室 HTML PPT 模板</title>
 <style>
   :root {
     --paper: #fff4dc;
@@ -27,42 +27,6 @@
       linear-gradient(90deg, rgba(32,27,23,.045) 1px, transparent 1px),
       var(--paper);
     background-size: 30px 30px;
-  }
-  body.style-rounded-memphis {
-    --paper: #fff8e1;
-    --paper-soft: #fffdf1;
-    --ink: #1a1a1a;
-    --muted: #403a34;
-    --tomato: #ff2d78;
-    --mustard: #ffe500;
-    --mint: #00e676;
-    --green: #c6ff00;
-    --line: 4px solid var(--ink);
-    --shadow: 7px 7px 0 var(--ink);
-    font-family: "Trebuchet MS", "Microsoft YaHei", "PingFang SC", Arial, sans-serif;
-    background:
-      linear-gradient(rgba(26,26,26,.045) 1.5px, transparent 1.5px),
-      linear-gradient(90deg, rgba(26,26,26,.045) 1.5px, transparent 1.5px),
-      #fff8e1;
-    background-size: 60px 60px;
-  }
-  body.style-bold-memphis {
-    --paper: #f7f0e6;
-    --paper-soft: #fff7df;
-    --ink: #000;
-    --muted: #171717;
-    --tomato: #ff6b9d;
-    --mustard: #ffde17;
-    --mint: #00d4ff;
-    --green: #7bed7b;
-    --line: 6px solid var(--ink);
-    --shadow: 10px 10px 0 var(--ink);
-    font-family: Impact, "Arial Black", "Microsoft YaHei", "PingFang SC", sans-serif;
-    background:
-      linear-gradient(rgba(0,0,0,.06) 1px, transparent 1px),
-      linear-gradient(90deg, rgba(0,0,0,.06) 1px, transparent 1px),
-      #f7f0e6;
-    background-size: 60px 60px;
   }
   .deck { width: 100vw; height: 100vh; display: grid; place-items: center; padding: 20px; }
   .slide {
@@ -91,65 +55,34 @@
     aspect-ratio: 3 / 4;
     padding: 42px 38px 38px;
   }
-  body.style-rounded-memphis .slide {
-    border-radius: 30px;
-    padding: 48px 58px 44px;
-  }
-  body.style-bold-memphis .slide {
-    border-radius: 10px;
-    box-shadow: 14px 14px 0 var(--ink);
-    padding: 48px 58px 44px;
-  }
-  body.aspect-3x4.style-rounded-memphis .slide,
-  body.aspect-3x4.style-bold-memphis .slide {
-    padding: 42px 38px 38px;
-  }
-  body.style-rounded-memphis .slide::before,
-  body.style-rounded-memphis .slide::after,
-  body.style-bold-memphis .slide::before,
-  body.style-bold-memphis .slide::after {
+  .slide::before,
+  .slide::after {
     content: "";
     position: absolute;
     pointer-events: none;
     z-index: 0;
   }
-  body.style-rounded-memphis .slide::before {
-    width: 76px;
-    height: 76px;
-    right: 36px;
+  .slide::before {
+    width: 70px;
+    height: 70px;
+    right: 38px;
     top: 34px;
-    border: 4px solid var(--ink);
+    border: 3px solid var(--ink);
     border-radius: 50%;
-    background: #ff2d78;
-    box-shadow: 6px 6px 0 var(--ink);
+    background: var(--mustard);
+    box-shadow: 5px 5px 0 var(--ink);
+    transform: rotate(4deg);
   }
-  body.style-rounded-memphis .slide::after {
-    width: 54px;
-    height: 54px;
+  .slide::after {
     left: 42px;
     bottom: 48px;
-    border: 4px solid var(--ink);
-    background: #00d4ff;
-    transform: rotate(45deg);
+    width: 88px;
+    height: 30px;
+    border: 3px solid var(--ink);
+    border-radius: 999px;
+    background: var(--mint);
     box-shadow: 5px 5px 0 var(--ink);
-  }
-  body.style-bold-memphis .slide::before {
-    width: 92px;
-    height: 92px;
-    right: 34px;
-    top: 30px;
-    background: #ffde17;
-    clip-path: polygon(50% 0%, 61% 35%, 98% 35%, 68% 57%, 79% 91%, 50% 70%, 21% 91%, 32% 57%, 2% 35%, 39% 35%);
-    filter: drop-shadow(6px 6px 0 #000);
-  }
-  body.style-bold-memphis .slide::after {
-    left: 36px;
-    bottom: 48px;
-    width: 120px;
-    height: 26px;
-    border: 5px solid #000;
-    background: repeating-linear-gradient(90deg, #000 0 10px, transparent 10px 20px);
-    transform: rotate(-8deg);
+    transform: rotate(-5deg);
   }
   .slide.active { display: block; }
   .slide > * { position: relative; z-index: 1; }
@@ -158,37 +91,6 @@
   h1, h2, p { margin: 0; }
   h2 { margin-top: 28px; font-size: 56px; line-height: 1.08; }
   body.aspect-3x4 h2 { margin-top: 22px; font-size: 46px; line-height: 1.06; }
-  body.style-rounded-memphis h2 {
-    font-size: 60px;
-    line-height: .98;
-    font-weight: 950;
-  }
-  body.aspect-3x4.style-rounded-memphis h2 { font-size: 50px; line-height: 1; }
-  body.style-rounded-memphis .accent {
-    display: inline-block;
-    padding: 0 .16em;
-    color: var(--ink);
-    background: var(--mustard);
-    border: 3px solid var(--ink);
-    border-radius: 12px;
-    transform: rotate(-1deg);
-  }
-  body.style-bold-memphis h2 {
-    font-size: 64px;
-    line-height: .94;
-    text-transform: uppercase;
-    color: #fff;
-    -webkit-text-stroke: 2px #000;
-    text-shadow: 5px 5px 0 #000, 9px 9px 0 #ffde17;
-  }
-  body.aspect-3x4.style-bold-memphis h2 {
-    font-size: 52px;
-    line-height: .98;
-    text-shadow: 4px 4px 0 #000, 7px 7px 0 #ffde17;
-  }
-  body.style-bold-memphis .accent {
-    color: #ffde17;
-  }
   .lead { margin-top: 18px; color: var(--muted); font-size: 25px; line-height: 1.42; font-weight: 750; }
   body.aspect-3x4 .lead { font-size: 22px; line-height: 1.42; }
   .accent { color: var(--tomato); }
@@ -222,59 +124,7 @@
   .vertical-stepper .step-row { grid-template-columns: 46px 1fr; padding: 16px 17px; }
   .vertical-stepper .step-row b { font-size: 23px; }
   .vertical-stepper .step-row p { font-size: 18px; }
-  body.aspect-3x4.style-rounded-memphis .vertical-cover h2,
-  body.aspect-3x4.style-rounded-memphis .quote-card h2 {
-    font-size: 54px;
-  }
-  body.aspect-3x4.style-rounded-memphis .quote-mark,
-  body.aspect-3x4.style-rounded-memphis .info-card,
-  body.aspect-3x4.style-rounded-memphis .vertical-stepper .step-row,
-  body.aspect-3x4.style-rounded-memphis .shot {
-    border-width: 4px;
-    border-radius: 28px;
-    box-shadow: 8px 8px 0 var(--ink);
-  }
-  body.aspect-3x4.style-rounded-memphis .mark {
-    background: #00e676;
-    border-width: 4px;
-    border-radius: 999px;
-  }
-  body.aspect-3x4.style-bold-memphis .vertical-cover h2,
-  body.aspect-3x4.style-bold-memphis .quote-card h2 {
-    font-size: 56px;
-    line-height: .96;
-    color: #fff;
-    -webkit-text-stroke: 2px #000;
-    text-shadow: 4px 4px 0 #000, 8px 8px 0 #ffde17;
-  }
-  body.aspect-3x4.style-bold-memphis .quote-mark,
-  body.aspect-3x4.style-bold-memphis .info-card,
-  body.aspect-3x4.style-bold-memphis .vertical-stepper .step-row,
-  body.aspect-3x4.style-bold-memphis .shot {
-    border-width: 5px;
-    border-radius: 8px;
-    box-shadow: 10px 10px 0 var(--ink);
-  }
-  body.aspect-3x4.style-bold-memphis .mark {
-    background: #ffde17;
-    border-width: 5px;
-    border-radius: 8px;
-    text-transform: uppercase;
-  }
   .shot { position: relative; border: var(--line); border-radius: 20px; background: #fff; box-shadow: 8px 8px 0 var(--ink); padding: 10px; cursor: zoom-in; }
-  body.style-rounded-memphis .shot {
-    border-radius: 28px;
-    padding: 12px;
-    transform: rotate(1.5deg);
-    background: #fff;
-    box-shadow: 9px 9px 0 var(--ink);
-  }
-  body.style-bold-memphis .shot {
-    border-radius: 8px;
-    padding: 12px;
-    transform: rotate(-1deg);
-    box-shadow: 12px 12px 0 var(--ink);
-  }
   .shot img { display: block; width: 100%; height: auto; max-height: 600px; object-fit: contain; border: 3px solid var(--ink); border-radius: 13px; background: #f2f2f2; }
   .shot.missing-image { min-height: 190px; display: grid; place-items: center; }
   .shot.missing-image::before { content: "替换为本地图片"; display: grid; place-items: center; min-height: 150px; width: 100%; border: 3px dashed var(--ink); border-radius: 13px; background: #fff8e8; color: var(--muted); font-size: 22px; font-weight: 950; }
@@ -286,28 +136,6 @@
   .step-badge { display: grid; place-items: center; width: 34px; height: 34px; border: 3px solid var(--ink); border-radius: 50%; background: var(--tomato); color: white; font-weight: 950; }
   .step-row b { display: block; font-size: 22px; line-height: 1.2; }
   .step-row p { margin: 5px 0 0; color: var(--muted); font-size: 17px; line-height: 1.35; font-weight: 700; }
-  body.style-rounded-memphis .step-row {
-    border-width: 4px;
-    border-radius: 22px;
-    box-shadow: 6px 6px 0 var(--ink);
-  }
-  body.style-bold-memphis .step-row {
-    border-width: 5px;
-    border-radius: 6px;
-    box-shadow: 7px 7px 0 var(--ink);
-  }
-  body.style-rounded-memphis .info-card,
-  body.style-rounded-memphis .check-row {
-    border-width: 4px;
-    border-radius: 24px;
-    box-shadow: 7px 7px 0 var(--ink);
-  }
-  body.style-bold-memphis .info-card,
-  body.style-bold-memphis .check-row {
-    border-width: 5px;
-    border-radius: 8px;
-    box-shadow: 9px 9px 0 var(--ink);
-  }
   .footer { position: absolute; left: 30px; right: 30px; bottom: 16px; display: flex; justify-content: space-between; color: var(--muted); font-size: 14px; font-weight: 900; }
   .progress { position: fixed; left: 24px; right: 24px; bottom: 9px; height: 10px; border: 2px solid var(--ink); border-radius: 999px; background: white; z-index: 20; }
   .progress span { display: block; width: 0; height: 100%; border-radius: 999px; background: var(--tomato); transition: width .16s ease; }
@@ -342,7 +170,7 @@
   }
 </style>
 </head>
-<!-- Change style class for visual presets and aspect class for deck/cards mode. -->
+<!-- 只切换 aspect class 来选择横版课件或竖版卡片。公开模板固定使用小亮实验室风格。 -->
 <body class="style-xiaoliang-lab aspect-16x9">
 <main class="deck" id="deck"></main>
 <div class="progress"><span id="bar"></span></div>
@@ -351,7 +179,7 @@
 <script>
 const deckSlides = [
   {
-    section: "CONTENT LAB",
+    section: "小亮实验室",
     title: "示例页",
     layout: "image",
     tag: "小亮风格 HTML PPT",
@@ -361,7 +189,7 @@ const deckSlides = [
     caption: "示例图片"
   },
   {
-    section: "// STEPS",
+    section: "步骤演示",
     title: "步骤 + 图片示例",
     layout: "imageStep",
     tag: "纵向步骤条",
@@ -374,7 +202,7 @@ const deckSlides = [
     caption: "按原图比例显示"
   },
   {
-    section: "// TEXT",
+    section: "结构拆解",
     title: "文字卡片示例",
     layout: "text",
     tag: "结构化讲解",
@@ -390,7 +218,7 @@ const deckSlides = [
 ];
 const cardSlides = [
   {
-    section: "CARDS 01",
+    section: "图文 01",
     title: "3:4 封面示例",
     layout: "coverVertical",
     tag: "3:4 图文卡片",
@@ -400,7 +228,7 @@ const cardSlides = [
     caption: "主视觉或关键截图"
   },
   {
-    section: "CARDS 02",
+    section: "图文 02",
     title: "观点卡示例",
     layout: "quoteCard",
     tag: "核心判断",
@@ -408,7 +236,7 @@ const cardSlides = [
     lead: "它要重新组织信息：更强标题、更短正文、更聚焦的截图。"
   },
   {
-    section: "CARDS 03",
+    section: "图文 03",
     title: "图文堆叠示例",
     layout: "stackedImage",
     tag: "截图聚焦",
@@ -418,7 +246,7 @@ const cardSlides = [
     caption: "聚焦截图"
   },
   {
-    section: "CARDS 04",
+    section: "图文 04",
     title: "竖向步骤示例",
     layout: "verticalSteps",
     tag: "行动路径",
@@ -431,15 +259,6 @@ const cardSlides = [
   }
 ];
 const params = new URLSearchParams(location.search);
-const styleParam = params.get("style");
-if (styleParam === "rounded" || styleParam === "rounded-memphis") {
-  document.body.classList.remove("style-xiaoliang-lab", "style-bold-memphis");
-  document.body.classList.add("style-rounded-memphis");
-}
-if (styleParam === "bold" || styleParam === "bold-memphis") {
-  document.body.classList.remove("style-xiaoliang-lab", "style-rounded-memphis");
-  document.body.classList.add("style-bold-memphis");
-}
 if (params.get("mode") === "cards" || params.get("aspect") === "3x4") {
   document.body.classList.remove("aspect-16x9");
   document.body.classList.add("aspect-3x4");
@@ -457,6 +276,8 @@ const zoomImage = document.querySelector("#zoomImage");
 const zoomFrame = document.querySelector(".zoom-frame");
 let index = 0;
 let zoomCloseTimer = 0;
+let touchStartX = 0;
+let touchStartY = 0;
 
 function escapeHTML(value) {
   return String(value ?? "").replace(/[&<>"']/g, char => ({
@@ -514,7 +335,7 @@ function renderSlide(s, i) {
   } else {
     body = `<div class="layout">${text}${shot}</div>`;
   }
-  return `<section class="slide" data-title="${s.title}"><div class="pin">${s.section}</div>${body}<div class="footer"><span>Xiaoliang HTML PPT Skill</span><span>${i + 1} / ${slides.length}</span></div></section>`;
+  return `<section class="slide" data-title="${escapeHTML(s.title)}"><div class="pin">${escapeHTML(s.section)}</div>${body}<div class="footer"><span>小亮实验室 HTML PPT</span><span>${i + 1} / ${slides.length}</span></div></section>`;
 }
 deck.innerHTML = slides.map(renderSlide).join("");
 const slideEls = [...document.querySelectorAll(".slide")];
@@ -528,7 +349,7 @@ function renderOverview() {
   overview.innerHTML = slides.map((slide, i) => `
     <button class="overview-card" type="button" data-index="${i}">
       <b>${i + 1}</b>
-      <span>${escapeHTML(slide.title || slide.headline || `Slide ${i + 1}`)}</span>
+      <span>${escapeHTML(slide.title || slide.headline || `第 ${i + 1} 页`)}</span>
     </button>
   `).join("");
   overview.querySelectorAll(".overview-card").forEach(button => {
@@ -543,8 +364,18 @@ function render() {
   bar.style.width = `${((index + 1) / slideEls.length) * 100}%`;
   history.replaceState(null, "", `${location.pathname}${location.search}#/${index + 1}`);
 }
+function closeZoom() {
+  clearTimeout(zoomCloseTimer);
+  zoomViewer.classList.remove("open");
+  zoomViewer.setAttribute("aria-hidden", "true");
+}
+function closeOverlays() {
+  overview.classList.remove("open");
+  closeZoom();
+}
 function go(next) {
   index = Math.max(0, Math.min(slideEls.length - 1, next));
+  closeZoom();
   render();
 }
 function bindImageZoom() {
@@ -572,18 +403,16 @@ function bindImageZoom() {
     if (zoomViewer.classList.contains("open") && !zoomFrame.contains(event.target)) {
       clearTimeout(zoomCloseTimer);
       zoomCloseTimer = setTimeout(() => {
-        zoomViewer.classList.remove("open");
-        zoomViewer.setAttribute("aria-hidden", "true");
+        closeZoom();
       }, 110);
     }
   });
   zoomViewer.addEventListener("click", () => {
-    clearTimeout(zoomCloseTimer);
-    zoomViewer.classList.remove("open");
-    zoomViewer.setAttribute("aria-hidden", "true");
+    closeZoom();
   });
 }
 document.addEventListener("keydown", event => {
+  if (event.altKey || event.ctrlKey || event.metaKey) return;
   if (event.key === "ArrowRight" || event.key === " " || event.key === "PageDown") go(index + 1);
   if (event.key === "ArrowLeft" || event.key === "PageUp") go(index - 1);
   if (event.key === "Home") go(0);
@@ -591,10 +420,7 @@ document.addEventListener("keydown", event => {
   if (event.key.toLowerCase() === "o") overview.classList.toggle("open");
   if (event.key.toLowerCase() === "f") document.documentElement.requestFullscreen?.();
   if (event.key === "Escape") {
-    overview.classList.remove("open");
-    clearTimeout(zoomCloseTimer);
-    zoomViewer.classList.remove("open");
-    zoomViewer.setAttribute("aria-hidden", "true");
+    closeOverlays();
   }
 });
 window.addEventListener("hashchange", () => {
@@ -603,12 +429,27 @@ window.addEventListener("hashchange", () => {
 });
 let lastWheelAt = 0;
 document.addEventListener("wheel", event => {
-  if (overview.classList.contains("open")) return;
+  if (overview.classList.contains("open") || zoomViewer.classList.contains("open")) return;
   const now = Date.now();
   if (now - lastWheelAt < 520 || Math.abs(event.deltaY) < 18) return;
   lastWheelAt = now;
   go(index + (event.deltaY > 0 ? 1 : -1));
 }, { passive: true });
+deck.addEventListener("pointerdown", event => {
+  if (overview.classList.contains("open") || zoomViewer.classList.contains("open")) return;
+  if (event.target.closest(".shot")) return;
+  touchStartX = event.clientX;
+  touchStartY = event.clientY;
+});
+deck.addEventListener("pointerup", event => {
+  if (!touchStartX && !touchStartY) return;
+  const dx = event.clientX - touchStartX;
+  const dy = event.clientY - touchStartY;
+  touchStartX = 0;
+  touchStartY = 0;
+  if (Math.abs(dx) < 72 || Math.abs(dx) < Math.abs(dy) * 1.4) return;
+  go(index + (dx < 0 ? 1 : -1));
+});
 index = readHashIndex();
 renderOverview();
 bindImageZoom();

@@ -1,4 +1,4 @@
 interface:
-  display_name: "Xiaoliang HTML PPT Skill"
-  short_description: "Creator-style HTML PPT decks and 3:4 cards."
-  default_prompt: "Use $xiaoliang-html-ppt-skill to turn my article and image assets into a 16:9 HTML PPT or 3:4 graphic-card deck."
+  display_name: "小亮实验室 HTML PPT Skill"
+  short_description: "生成小亮实验室风格的 16:9 HTML PPT 和 3:4 图文卡片。"
+  default_prompt: "使用 $xiaoliang-html-ppt-skill，把我的文章和图片素材做成小亮实验室风格的 16:9 HTML PPT 或 3:4 图文卡片。"

@@ -1,177 +1,163 @@
 ---
 name: xiaoliang-html-ppt-skill
-description: Create Xiaoliang-style HTML PPT decks and cards from articles, outlines, pasted long-form Chinese content, and image asset folders. Use when the user wants a warm hand-drawn AI content lab presentation, creator teaching deck, GitHub/tutorial explainer, browser-recorded 16:9 HTML slide deck, 3:4 vertical graphic cards for Xiaohongshu/WeChat/social posts, clickable/keyboard/wheel slideshow, image-heavy lecture PPT, or selectable styles such as "小亮手绘实验室", "圆润孟菲斯", or "粗黑孟菲斯" with hover-zoom screenshots and practical teaching density.
+description: 将文章、提纲、中文长文和图片素材目录，制作成小亮实验室风格的 HTML PPT 或 3:4 图文卡片。适合创作者教学课件、AI 工具讲解、GitHub/产品教程、公众号长文改造、录屏翻页演示、图片较多的界面教学，以及小红书/公众号可逐页发布的竖版知识卡片。
 ---
 
-# Xiaoliang HTML PPT Skill
+# 小亮实验室 HTML PPT Skill
 
-## Purpose
+## 用途
 
-Turn long-form creator/tutorial content into a usable HTML PPT for either 16:9 screen-recorded teaching or 3:4 vertical graphic cards. The result should feel like a warm AI creator notebook: practical, human, image-rich, hand-drawn, and easy to narrate or read page by page.
+把创作者文章、教程、讲稿和截图素材，做成一份能讲清楚、能录屏、也能逐页阅读的 HTML PPT。默认也是唯一视觉方向：**小亮实验室风格**。
 
-This skill is not for generic corporate decks. It is for creator-led explainers where the audience must learn concrete concepts, interfaces, workflows, or tool usage.
+这个 Skill 不做通用商务模板，也不提供多套视觉皮肤。第一版对外分享时只保留一个明确风格：温暖、手绘、纸感、可教学、适合科技小亮账号内容。
 
-## Required Workflow
+## 必须遵循的工作流
 
-1. **Read the source fully.**
-   - For pasted articles, read the full file, not just the beginning.
-   - Preserve the article's actual teaching depth. Do not collapse detailed writing into empty summaries.
-   - Extract the real learning path: why it matters, concepts, step-by-step operations, interface walkthrough, common confusion, and final action.
+1. **完整阅读来源内容。**
+   - 如果是粘贴文章或本地文件，必须读完整，不要只看开头。
+   - 保留原文真正的教学深度，不能把详细教程压成空泛摘要。
+   - 提取真实学习路径：为什么重要、核心概念、具体操作、界面 walkthrough、常见误区、最后行动。
 
-2. **Inventory image assets before writing slides.**
-   - List all image directories and files.
-   - Make a contact sheet or inspect images one by one when the folder has many screenshots.
-   - Classify each image as: cover/concept illustration, real UI screenshot, operation detail, summary diagram, case/example, or closing visual.
-   - Place screenshots near the exact concept or operation they explain. Do not dump images randomly.
+2. **先盘点图片素材，再写页面。**
+   - 列出所有图片目录和文件。
+   - 图片多时先做 contact sheet，或逐张用图片查看工具检查。
+   - 给每张图分类：封面/概念图、真实界面截图、操作细节、总结图、案例图、收尾视觉。
+   - 截图必须放在它正在解释的概念或操作附近，不要随机堆图。
 
-3. **Choose the output mode.**
-   - Default to `deck`: a 16:9 horizontal teaching deck for screen recording and walkthroughs.
-   - Use `cards`: a 3:4 vertical graphic-card deck when the user says 3:4, vertical, cards, graphic post, Xiaohongshu, WeChat images, social post, or asks for content suitable for image publishing.
-   - Do not treat `cards` as a cropped 16:9 deck. Rewrite the information into independently readable cards.
+3. **选择输出模式。**
+   - 默认使用 `deck`：16:9 横版教学课件，适合录屏讲解和横屏演示。
+   - 当用户说 3:4、竖版、卡片、图文、小红书、公众号配图、社交发布时，使用 `cards`。
+   - `cards` 不是裁剪版 16:9，而是重新改写成能单页阅读的图文卡片。
 
-4. **Plan a teaching deck or card series, not an article summary.**
-   - For `deck`, prefer 30-50 slides for a detailed tutorial article.
-   - For `cards`, prefer 8-20 cards with stronger titles, tighter body copy, and one self-contained point per card.
-   - Use one slide/card per teachable unit: one concept, one UI region, one operation, one comparison, or one recap.
-   - Each slide/card should answer: "What does the audience learn here?"
-   - Include enough visible text for comprehension, but keep it readable during recording or standalone reading.
+4. **规划教学路径，而不是做文章摘要。**
+   - `deck` 适合 30-50 页的详细教程。
+   - `cards` 适合 8-20 张图文卡片，每张卡只讲一个自洽观点。
+   - 每页只承载一个可教学单元：一个概念、一个界面区域、一个操作步骤、一个对比或一个总结。
+   - 每页都要能回答：“观众看完这一页学会了什么？”
 
-5. **Choose the visual style.**
-   - If the user specifies a style, follow it exactly.
-   - If unspecified, default to `小亮手绘实验室`.
-   - Supported style triggers:
-     - `小亮手绘实验室`, `xiaoliang-lab`, `default`
-     - `圆润孟菲斯`, `rounded-memphis`, `candy-memphis`
-     - `粗黑孟菲斯`, `bold-memphis`, `poster-memphis`
-   - Read `references/style-presets.md` before implementing non-default styles.
+5. **只使用小亮实验室风格。**
+   - 不再提供其它风格选项。
+   - 即使用户提到其它风格，也优先说明当前公开版只保留“小亮实验室”，并用这个风格完成。
+   - 风格关键词：`小亮实验室`、`小亮手绘实验室`、`小亮风格`、`xiaoliang-lab`、`手绘实验室`。
+   - 具体视觉规范见 `references/style-presets.md` 和 `references/design-system.md`。
 
-6. **Build a static single-file HTML deck unless the user asks otherwise.**
-   - Keep the deck self-contained except for local image paths.
-   - Use 16:9 slide stage for `deck`; use 3:4 slide stage for `cards`.
-   - Support keyboard navigation, wheel navigation, overview mode, fullscreen, and image hover zoom.
-   - Use local relative image paths so the deck works inside the project folder.
-   - Use bundled `deck` layouts intentionally: `image`, `imageWide`, `duo`, `imageStep`, `text`, and `steps`.
-   - Use bundled `cards` layouts intentionally: `coverVertical`, `quoteCard`, `stackedImage`, and `verticalSteps`.
+6. **生成静态单文件 HTML。**
+   - 除本地图片路径外，HTML 应尽量自包含。
+   - `deck` 使用 16:9 舞台，`cards` 使用 3:4 舞台。
+   - 必须支持键盘翻页、鼠标滚轮翻页、概览模式、全屏、hash 深链、图片悬停放大。
+   - 图片路径使用相对路径，方便在项目目录里直接打开。
+   - 横版常用布局：`image`、`imageWide`、`duo`、`imageStep`、`text`、`steps`。
+   - 竖版常用布局：`coverVertical`、`quoteCard`、`stackedImage`、`verticalSteps`。
 
-7. **Verify with a browser.**
-   - Open with Chrome/Playwright or the available browser tool.
-   - Check all images load.
-   - Check all slides render in the selected aspect ratio without key text or images overflowing.
-   - Test keyboard navigation, wheel navigation, overview, fullscreen, and hover zoom.
+7. **浏览器验证后再交付。**
+   - 检查所有图片是否加载。
+   - 检查 16:9 或 3:4 比例是否正确。
+   - 检查关键文字和图片没有溢出。
+   - 测试键盘、滚轮、概览、全屏、hash 深链和悬停放大。
 
-## Deck Structure
+## 页面结构建议
 
-Use this default structure for tutorial/explainer decks:
+横版教学课件建议结构：
 
-1. Cover: topic, promise, main image.
-2. Learning outcome: what the audience will know or be able to do.
-3. Why this matters: connect to AI/content/tool workflow.
-4. Concept foundation: definitions and mental models.
-5. Real interface walkthrough: use screenshots with accurate placement.
-6. Step-by-step operation: one decision or UI region per slide.
-7. Important mechanisms: branches, commits, PR, settings, deployment, etc.
-8. Practical scenarios: how this fits real creator/AI workflows.
-9. Summary/action: concrete next steps.
+1. 封面：主题、承诺、主视觉。
+2. 学习结果：观众看完能理解什么或完成什么。
+3. 为什么重要：连接到 AI、内容创作或工具工作流。
+4. 概念基础：定义、心智模型和判断标准。
+5. 真实界面 walkthrough：用截图解释界面区域。
+6. 操作步骤：一页只讲一个关键决策或控件。
+7. 重要机制：分支、提交、PR、设置、部署等。
+8. 实战场景：放到创作者或 AI 工作流里解释。
+9. 总结行动：明确下一步怎么做。
 
-For long tutorials, insert recap slides after major sections only when they improve pacing.
+3:4 图文卡片建议结构：
 
-For 3:4 `cards`, use a publishing-card structure:
+1. 封面卡：强主题、明确承诺、强视觉信号。
+2. 问题卡：为什么读者需要关心。
+3. 概念卡：一张卡讲一个观点。
+4. 流程卡：竖向步骤或聚焦截图。
+5. 对比/转折卡：需要时用来增强理解。
+6. 总结/行动卡：给清单、下一步或一句收束。
 
-1. Cover card: strong topic, promise, visual signal.
-2. Problem card: why readers should care.
-3. Concept cards: one point per card, with self-contained wording.
-4. Workflow cards: vertical steps or focused screenshots.
-5. Comparison/turning-point cards when useful.
-6. Summary/action card: concrete next step or checklist.
+## 小亮实验室风格
 
-For `cards`, avoid page sequences that only work with spoken narration. Each card should be readable as a standalone image.
+- 暖纸背景：奶油色、暖灰、淡黄、浅桃色。
+- 轻微笔记本/网格纹理。
+- 深色手绘粗线框、错位黑色投影、贴纸标签、胶囊标签。
+- 点缀色：番茄红、芥末黄、薄荷绿、浅桃色、墨黑。
+- 卡片圆角约 16-26px，只在有帮助时轻微旋转。
+- 文案使用中文，像创作者在给观众讲明白一件事。
+- 避免蓝紫 AI 渐变、深色赛博面板、玻璃拟态和通用 SaaS 首屏感。
 
-## Visual Style
+## 交互要求
 
-Default to the Xiaoliang content lab aesthetic:
+每个 HTML PPT 都应该支持：
 
-- Warm paper backgrounds: cream, warm gray, pale yellow, light peach.
-- Subtle notebook/grid texture.
-- Strong dark hand-drawn borders, offset black shadows, sticker labels, pill tags.
-- Accent colors: tomato red, mustard yellow, mint green, pale peach, ink black.
-- Rounded cards around 16-26px, slightly rotated only when it helps the handmade feel.
-- Avoid blue-purple AI gradients, dark cyber dashboards, glassmorphism, and generic SaaS hero layouts.
+- 方向键、空格、PageUp/PageDown、Home/End。
+- 鼠标滚轮翻页，并做节流。
+- `O` 打开/关闭概览。
+- `F` 进入全屏。
+- `Esc` 关闭概览和图片放大。
+- `#/12` 这类 hash 深链。
+- 图片悬停放大：
+  - 鼠标移入原图时打开放大预览。
+  - 鼠标在放大卡片内移动时保持打开。
+  - `cards` 模式下，放大预览必须限制在当前 3:4 卡片边界内。
+  - 鼠标离开放大卡片、点击遮罩或按 `Esc` 时关闭。
+  - 使用柔和透明度/缩放过渡。
 
-See `references/design-system.md` for concrete CSS tokens, layout rules, typography, and screenshot treatment.
+实现参考见 `references/interactions.md`。
 
-For selectable style variants, see `references/style-presets.md`. Use the names and aliases in that file so users can trigger styles by natural instructions.
+## 作者规则
 
-## Interaction Requirements
+- 真实截图必须足够大，含细节的截图不要塞进很小的左右分栏。
+- `cards` 模式少放截图，但要更聚焦，优先裁切到关键区域。
+- 截图卡片要按原图比例包裹，不要用固定高度制造上下大空白。
+- “步骤 + 截图”页面优先用纵向步骤条，避免长中文挤进横向小卡片。
+- 双图布局只有在两张都清楚时才使用，否则改成上下堆叠或单独一页。
+- UI 截图旁的文字要告诉观众看哪里，例如“Code 按钮”“Pages source”“Secrets and variables”。
+- 避免“提升效率”“方便协作”这类空泛表述，除非配合具体界面或动作。
+- 不做落地页，第一屏就是可翻页内容本身。
 
-Every HTML deck should support:
+## 开始实现
 
-- Arrow keys, Space, PageUp/PageDown, Home/End.
-- Mouse wheel page navigation with throttling.
-- `O` overview grid.
-- `F` fullscreen.
-- Hash deep links like `#/12`.
-- Hover zoom for images:
-  - Hover original image to open an enlarged preview.
-  - Keep preview open while the cursor is inside the enlarged image card.
-  - In 3:4 `cards` mode, the enlarged preview must stay inside the current 3:4 slide boundary so screen recordings never crop the zoomed image.
-  - Close when cursor leaves the enlarged card, on click, or on `Esc`.
-  - Use soft fade/scale transitions, not a hard cut.
+从零创建小亮实验室 HTML PPT 时：
 
-See `references/interactions.md` for the implementation pattern.
+1. 读 `references/authoring-workflow.md`。
+2. 读 `references/style-presets.md`。
+3. 读 `references/design-system.md`。
+4. 读 `references/interactions.md`。
+5. 复制或改造 `assets/template.html`。
+6. 替换 slide 数据和图片路径。
+7. 浏览器验证后再交付。
 
-## Authoring Rules
+## 模板能力
 
-- Use real screenshots large enough to inspect. If a screenshot contains UI details, avoid tiny side-by-side placement.
-- In `cards` mode, use fewer screenshots and crop/focus them more aggressively so the UI remains legible in 3:4.
-- Screenshot cards must wrap the original image ratio. Do not use fixed-height image frames that create large blank bands above or below the screenshot.
-- For "steps + screenshot" slides, use a vertical stepper layout instead of narrow horizontal step cards when Chinese titles/descriptions are long.
-- Use two-image layouts only when both images remain legible; otherwise stack images vertically or give one image a dedicated slide.
-- For UI screenshots, visible text should identify what to look at: e.g. "Code button", "GitHub Pages source", "Secrets and variables".
-- Use concept illustrations for mental models and transitions; use real screenshots for operations.
-- Avoid vague bullets such as "improves collaboration" unless paired with a concrete UI or workflow.
-- Do not make a landing page. The first screen must be the slide deck itself.
+横版布局：
 
-## Implementation Starting Point
+- `image`：左文右图。
+- `imageWide`：左侧说明 + 右侧大截图。
+- `duo`：文字 + 两张上下堆叠图片。
+- `imageStep`：纵向步骤条 + 截图。
+- `text`：标题 + 信息卡片或清单。
+- `steps`：纯步骤页。
 
-When creating a new Xiaoliang-style HTML PPT from scratch:
+竖版布局：
 
-1. Read `references/authoring-workflow.md`.
-2. Read `references/design-system.md`.
-3. If the user specifies a style, read `references/style-presets.md`.
-4. Read `references/interactions.md`.
-5. Copy or adapt `assets/template.html`.
-6. Replace the slide data and image paths.
-7. Verify before reporting done.
+- `coverVertical`：3:4 封面卡。
+- `quoteCard`：观点/金句卡。
+- `stackedImage`：文字和图片上下堆叠。
+- `verticalSteps`：竖向步骤卡。
 
-## Template Capabilities
+模板还包含比例切换、键盘/滚轮导航、概览、全屏、hash 深链和图片悬停放大。改造模板时必须保留这些能力。
 
-The bundled template includes these common layouts:
+## 完成检查
 
-Deck layouts:
-
-- `image`: balanced text plus one image.
-- `imageWide`: text plus a larger UI screenshot.
-- `duo`: text plus two stacked images.
-- `imageStep`: vertical stepper plus a screenshot.
-- `text`: headline plus cards or checklist rows.
-- `steps`: numbered operation cards.
-
-Cards layouts:
-
-- `coverVertical`: 3:4 cover card with strong title and optional image.
-- `quoteCard`: 3:4观点/金句 card for a single memorable claim.
-- `stackedImage`: 3:4 vertical text plus image or image plus text.
-- `verticalSteps`: 3:4 vertical step sequence.
-
-It also includes aspect classes, keyboard/wheel navigation, `O` overview, `F` fullscreen, hash deep links, and hover zoom. Preserve these capabilities when adapting the template.
-
-## Done Checklist
-
-- Source article has been fully represented at teaching depth.
-- All provided useful images were inspected and intentionally placed.
-- Requested style has been applied consistently, or default style was used intentionally.
-- Real UI screenshots are large enough to read or have hover zoom.
-- Deck uses the requested aspect ratio: 16:9 for `deck`, 3:4 for `cards`.
-- Cards mode uses self-contained pages, readable vertical composition, and no squeezed horizontal layouts.
-- Hover zoom is smooth; in `cards` mode it is bounded by the 3:4 slide frame.
-- Browser verification confirms image loading and no key overflow.
+- 已完整表达来源内容的教学深度。
+- 有用图片都已检查并放到对应讲解位置。
+- 全部文案和提示词为中文，必要的代码标识除外。
+- 视觉只使用小亮实验室风格。
+- 真实 UI 截图足够大，或支持悬停放大。
+- 输出比例正确：`deck` 为 16:9，`cards` 为 3:4。
+- `cards` 每页可独立阅读，没有把横版布局硬塞进竖版。
+- 悬停放大平滑；`cards` 模式下放大区域限制在当前卡片内。
+- 浏览器验证确认图片加载、交互可用、关键内容不溢出。

@@ -1,147 +1,144 @@
-# Authoring Workflow
+# 作者工作流
 
-## 1. Read And Segment The Article
+## 1. 阅读并拆解文章
 
-For each section, identify:
+阅读来源内容时，为每个段落或小节记录：
 
-- Core point.
-- Audience confusion it resolves.
-- Concrete example or operation.
-- Screenshot or illustration needed.
-- What the user should remember after the slide.
+- 核心观点是什么。
+- 它解决了观众的哪一个困惑。
+- 是否有具体例子、界面或操作。
+- 需要哪类截图或插图辅助理解。
+- 观众看完这一页应该记住什么。
 
-Do not compress detailed article content into generic bullets. If the article explains a concept carefully, reflect that teaching detail in multiple slides.
+不要把详细教程压缩成泛泛的三五个要点。原文如果认真解释了一个概念，就应该拆成多页讲清楚。
 
-## 2. Build An Image Inventory
+## 2. 建立图片清单
 
-For each image file, record:
+对每张图片记录：
 
-- Filename.
-- Type: concept, screenshot, detail, diagram, cover, closing.
-- Visible UI/content.
-- Best slide placement.
-- Whether it needs hover zoom.
+- 文件名。
+- 类型：概念图、截图、细节图、流程图、封面图、收尾图。
+- 画面里能看到什么界面或内容。
+- 最适合放在哪一页。
+- 是否需要悬停放大。
 
-For many images, create a contact sheet using browser rendering or inspect with the available image viewer.
+图片多时，先做 contact sheet 或逐张检查。不要在没看图的情况下安排页面。
 
-## 3. Decide Output Mode And Slide Count
+## 3. 决定输出模式和页数
 
-Choose `deck` unless the user asks for 3:4, vertical cards, graphic posts, Xiaohongshu, WeChat images, or social-post cards.
+默认选择 `deck`，除非用户明确提到 3:4、竖版、图文、卡片、小红书、公众号配图或社交发布。
 
-For `deck`, use this rough density:
+`deck` 页数参考：
 
-- 1 cover slide.
-- 1 learning outcome slide.
-- 1-2 slides for why this matters.
-- 2-4 slides per major concept.
-- 1 slide per UI page or important control.
-- 1-2 closing/action slides.
+- 1 页封面。
+- 1 页学习结果。
+- 1-2 页解释为什么重要。
+- 每个主要概念 2-4 页。
+- 每个关键界面或控件 1 页。
+- 1-2 页总结和行动。
 
-Detailed tutorials commonly need 30-50 slides.
+详细教程通常需要 30-50 页。
 
-For `cards`, use a tighter publishing sequence:
+`cards` 页数参考：
 
-- 1 cover card.
-- 1 problem or hook card.
-- 4-12 concept/workflow cards.
-- 1-3 recap or action cards.
+- 1 张封面卡。
+- 1 张问题或钩子卡。
+- 4-12 张概念/流程卡。
+- 1-3 张总结或行动卡。
 
-Detailed articles commonly become 8-20 cards. Do not mechanically split every paragraph into cards; rewrite into a clear graphic-reading path.
+详细文章通常变成 8-20 张卡片。不要机械地把每个段落都切成一张卡，而要重新组织成清楚的图文阅读路径。
 
-## 4. Write Slide Copy
+## 4. 写页面文案
 
-Use warm direct Chinese. A good slide has:
+全部文案优先使用中文。必要的代码、文件名、快捷键、布局名和 URL 参数可以保留英文。
 
-- A section pin.
-- A short role tag.
-- A headline with one clear claim.
-- A lead paragraph or 3-5 concrete checklist/cards.
-- A screenshot/visual that directly supports the claim.
+一页好的小亮实验室 PPT 通常包含：
 
-Avoid empty phrases:
+- 一个 section pin。
+- 一个短角色标签。
+- 一个清晰判断式标题。
+- 一段 lead 或 3-5 个具体卡片/清单。
+- 一张直接支撑当前观点的截图或视觉。
 
-- "提升效率"
-- "方便协作"
-- "更好管理"
+避免空话：
 
-Replace with concrete teaching:
+- “提升效率”
+- “方便协作”
+- “更好管理”
 
-- "PR 页面会显示哪些文件被改了，绿色是新增，红色是删除。"
-- "Settings > Pages 里选择分支和目录后，GitHub 会生成 github.io 地址。"
+替换成具体教学表达：
 
-For `cards`, make each page readable without voiceover:
+- “PR 页面会显示哪些文件被改了，绿色是新增，红色是删除。”
+- “Settings > Pages 里选好分支和目录后，GitHub 会生成 github.io 地址。”
+- “图文卡片只展示当前要讲的按钮，不塞完整桌面截图。”
 
-- Use titles that state a viewpoint, not just a topic.
-- Keep body copy tighter than `deck` mode.
-- Prefer 2-4 strong points per card.
-- Use stronger transitions between cards: problem, method, example, action.
-- Avoid relying on "as mentioned on the previous slide" wording.
+`cards` 模式下，每张卡都要不依赖口播也能读懂：
 
-## 5. Place Images
+- 标题写观点，不只写话题。
+- 正文比横版更短。
+- 每张卡保留 2-4 个强信息点。
+- 卡片之间形成“问题、方法、例子、行动”的阅读路径。
+- 避免使用“上一页提到”这类依赖前文的表达。
 
-Use the image where the audience needs it:
+## 5. 放置图片
 
-- Definition slide: concept illustration.
-- Operation slide: real screenshot.
-- Summary slide: diagram.
-- Closing slide: human/open-source/community visual.
+图片要放在观众需要它的地方：
 
-If a screenshot contains dense UI, give it a large right panel or a full slide. Avoid making key screenshots too small.
+- 定义页：概念图。
+- 操作页：真实截图。
+- 总结页：流程图或结构图。
+- 收尾页：人物、社区、开源或行动视觉。
 
-For screenshots in framed cards, preserve the original image ratio. Do not create a fixed-height frame that leaves large blank bands around a wide screenshot. The image card should wrap the rendered screenshot, with only a small matte/padding and caption sticker.
+如果截图里有细节，应给它足够大的右侧区域或单独一页。不要把关键截图缩得看不清。
 
-For "steps + screenshot" pages, use a vertical stepper rather than several narrow horizontal cards. Long Chinese step titles and explanations should have enough width to wrap naturally.
+截图卡片要保持原图比例。不要用固定高度让宽截图上下出现大块空白。
 
-For `cards`, crop or focus screenshots more aggressively. A full desktop screenshot often becomes too small in 3:4; prefer a focused UI region, one key control, or a large screenshot with only short explanatory text.
+“步骤 + 截图”页面优先使用纵向步骤条。长中文标题和说明需要足够宽度自然换行。
 
-## 6. Implement
+`cards` 模式下，截图要更聚焦。完整桌面截图在 3:4 里通常太小，优先裁切到关键控件、关键区域或一张大截图配短说明。
 
-Prefer a data-driven single HTML file:
+## 6. 实现
 
-- Define `slides = [...]`.
-- Render layout templates with JavaScript.
-- Keep CSS tokens at the top.
-- Keep interactions at the bottom.
-- Use relative asset paths.
+优先使用数据驱动的单文件 HTML：
 
-Use `assets/template.html` as a starting point when useful.
+- 定义 `slides = [...]`。
+- 用 JavaScript 渲染布局模板。
+- CSS token 放在顶部。
+- 交互脚本放在底部。
+- 图片使用相对路径。
 
-The template supports these layout names:
+可从 `assets/template.html` 开始改。
 
-Deck layouts:
+横版布局：
 
-- `image`: balanced text plus one image.
-- `imageWide`: narrower text plus a large screenshot.
-- `duo`: text plus two stacked images.
-- `imageStep`: vertical stepper plus one screenshot.
-- `text`: headline plus cards or checklist rows.
-- `steps`: numbered action cards without a screenshot.
+- `image`：左文右图。
+- `imageWide`：较窄文字 + 大截图。
+- `duo`：文字 + 两张上下堆叠图片。
+- `imageStep`：纵向步骤条 + 一张截图。
+- `text`：标题 + 信息卡片或清单。
+- `steps`：无截图步骤页。
 
-Use `imageWide` for dense UI screenshots, `imageStep` for operations beside screenshots, and `duo` only when both images remain legible.
+竖版布局：
 
-Cards layouts:
+- `coverVertical`：3:4 封面卡。
+- `quoteCard`：观点或金句卡。
+- `stackedImage`：文字 + 聚焦截图。
+- `verticalSteps`：竖向步骤卡。
 
-- `coverVertical`: 3:4 cover card with a strong title and optional main image.
-- `quoteCard`: 3:4 claim or quote card for one memorable idea.
-- `stackedImage`: 3:4 text plus focused screenshot/image.
-- `verticalSteps`: 3:4 vertical step sequence.
+## 7. 验证
 
-Use `coverVertical` for the first card, `quoteCard` for turning points and key claims, `stackedImage` for one focused screenshot, and `verticalSteps` for tutorial steps.
+最终交付前做浏览器检查：
 
-## 7. Verify
+- 统计页数。
+- 检查所有引用图片存在并加载成功。
+- 打开 `#/3` 这类深链，确认能跳到正确页面。
+- 确认比例正确：`deck` 为 16:9，`cards` 为 3:4。
+- 检查关键文字和图片不溢出。
+- `cards` 每页都能独立阅读，没有横版布局硬塞进竖版。
+- 测试键盘导航。
+- 测试滚轮导航。
+- 测试概览模式。
+- 测试图片悬停放大。
+- `cards` 模式下确认放大图片限制在当前 3:4 页面内。
 
-Run browser verification before final response:
-
-- Count slides.
-- Check every referenced image exists and loads.
-- Open a deep link such as `#/3` and confirm it activates the correct slide.
-- Confirm the selected aspect ratio: 16:9 for `deck`, 3:4 for `cards`.
-- Check no key text/image element overflows the slide.
-- For `cards`, confirm each page reads as a standalone graphic card and no horizontal layout is squeezed into the vertical canvas.
-- Test keyboard navigation.
-- Test wheel navigation.
-- Test overview.
-- Test hover zoom boundary and smooth transition.
-- For `cards`, confirm the zoomed image stays inside the current 3:4 slide frame.
-
-In the final response, report the file path, slide count, image coverage, and verification outcome.
+最终回复应报告文件路径、页数、图片覆盖情况和验证结果。

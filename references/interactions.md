@@ -1,24 +1,27 @@
-# Interaction Pattern
+# 交互模式
 
-Implement interactions in plain JavaScript unless the repo already uses a slide framework.
+除非项目已经使用现成幻灯片框架，否则使用原生 JavaScript 实现交互。
 
-## Navigation
+## 翻页导航
 
-Support:
+必须支持：
 
-- ArrowRight, Space, PageDown: next slide.
-- ArrowLeft, PageUp: previous slide.
-- Home/End: first/last slide.
-- `O`: overview grid.
-- `F`: fullscreen.
-- `Esc`: close overview and zoom.
-- Hash links: `#/1`, `#/2`, etc.
-- Mouse wheel with throttling:
+- `ArrowRight`、空格、`PageDown`：下一页。
+- `ArrowLeft`、`PageUp`：上一页。
+- `Home` / `End`：第一页 / 最后一页。
+- `O`：打开或关闭概览。
+- `F`：进入全屏。
+- `Esc`：关闭概览和图片放大。
+- Hash 深链：`#/1`、`#/2`。
+- 鼠标滚轮翻页，并做节流。
+- 触摸屏或触控板上的横向滑动翻页。
+
+参考实现：
 
 ```js
 let lastWheelAt = 0;
 document.addEventListener("wheel", event => {
-  if (overview.classList.contains("open")) return;
+  if (overview.classList.contains("open") || zoomViewer.classList.contains("open")) return;
   const now = Date.now();
   if (now - lastWheelAt < 520 || Math.abs(event.deltaY) < 18) return;
   lastWheelAt = now;
@@ -26,31 +29,33 @@ document.addEventListener("wheel", event => {
 }, { passive: true });
 ```
 
-These interactions apply to both `deck` 16:9 mode and `cards` 3:4 mode. Do not remove navigation, overview, hash links, or hover zoom when switching aspect ratio.
+这些交互同时适用于 `deck` 16:9 和 `cards` 3:4。切换比例时，不能丢掉导航、概览、hash 深链或图片悬停放大。
 
-The bundled template may also switch preview mode from URL parameters:
+当图片放大层打开时，滚轮和滑动不应继续翻页；导航到其它页时应自动关闭图片放大层。
 
-- `?mode=cards` or `?aspect=3x4`: use 3:4 `cards`.
-- `?mode=deck` or `?aspect=16x9`: use 16:9 `deck`.
-- `?style=rounded` or `?style=rounded-memphis`: preview rounded Memphis.
-- `?style=bold` or `?style=bold-memphis`: preview bold Memphis.
+模板允许通过 URL 参数切换输出模式：
 
-## Image Hover Zoom
+- `?mode=cards` 或 `?aspect=3x4`：使用 3:4 图文卡片。
+- `?mode=deck` 或 `?aspect=16x9`：使用 16:9 横版课件。
 
-Use an overlay that opens when hovering the original image, then keeps the open/close boundary on the enlarged card, not on the original thumbnail.
+不要加入 `?style=` 参数。公开版只支持小亮实验室风格。
 
-For 3:4 `cards`, the overlay must be bounded to the active slide rectangle. This is required for Xiaohongshu-style recording: the enlarged image cannot exceed the 3:4 canvas, otherwise the screen recording will crop useful content.
+## 图片悬停放大
 
-Required behavior:
+图片放大使用 overlay。鼠标移入原图时打开，打开后由放大卡片本身控制保持和关闭，而不是由原缩略图控制。
 
-- Enter original image: open zoom overlay.
-- Move within enlarged card: stay open.
-- In `cards` mode: enlarged preview stays inside the active 3:4 slide frame.
-- Leave enlarged card: close after a short delay.
-- Click overlay or press Esc: close.
-- Use fade/scale transition.
+`cards` 模式下，overlay 必须被限制在当前 3:4 页面矩形内。这样录屏或导出时，放大截图不会超过竖版画布边界。
 
-CSS:
+必需行为：
+
+- 鼠标移入原图：打开 overlay。
+- 鼠标在放大卡片内：保持打开。
+- `cards` 模式：放大预览限制在当前 3:4 页面内。
+- 鼠标离开放大卡片：短暂延迟后关闭。
+- 点击 overlay 或按 `Esc`：关闭。
+- 使用透明度和缩放过渡。
+
+CSS 参考：
 
 ```css
 .zoom-viewer {
@@ -81,118 +86,59 @@ CSS:
   visibility: visible;
   pointer-events: auto;
 }
-.zoom-frame {
-  max-width: min(94vw, 1500px);
-  max-height: 88vh;
-  padding: 14px;
-  border: var(--line);
-  border-radius: 22px;
-  background: #fffdf4;
-  box-shadow: 12px 12px 0 var(--ink);
-  opacity: 0;
-  transform: rotate(-.4deg) scale(.965);
-  transition: opacity .16s ease, transform .18s cubic-bezier(.2, .8, .2, 1);
-}
-.zoom-viewer.slide-bound .zoom-frame {
-  max-width: calc(var(--zoom-width, 100vw) - 64px);
-  max-height: calc(var(--zoom-height, 100vh) - 64px);
-}
-.zoom-viewer.open .zoom-frame {
-  opacity: 1;
-  transform: rotate(-.4deg) scale(1);
-}
-.zoom-frame img {
-  display: block;
-  max-width: calc(94vw - 42px);
-  max-height: calc(88vh - 42px);
-  object-fit: contain;
-}
-.zoom-viewer.slide-bound .zoom-frame img {
-  max-width: calc(var(--zoom-width, 100vw) - 106px);
-  max-height: calc(var(--zoom-height, 100vh) - 106px);
-}
 ```
 
-JS:
+JS 参考：
 
 ```js
-const zoomViewer = document.querySelector("#zoomViewer");
-const zoomImage = document.querySelector("#zoomImage");
-const zoomFrame = document.querySelector(".zoom-frame");
-let zoomCloseTimer = 0;
-
-function bindImageZoom() {
-  function applyZoomBounds() {
-    const isCards = document.body.classList.contains("aspect-3x4");
-    zoomViewer.classList.toggle("slide-bound", isCards);
-    if (!isCards) return;
-    const rect = slideEls[index].getBoundingClientRect();
-    zoomViewer.style.setProperty("--zoom-left", `${rect.left}px`);
-    zoomViewer.style.setProperty("--zoom-top", `${rect.top}px`);
-    zoomViewer.style.setProperty("--zoom-width", `${rect.width}px`);
-    zoomViewer.style.setProperty("--zoom-height", `${rect.height}px`);
-  }
-  document.querySelectorAll(".shot img").forEach(image => {
-    image.addEventListener("mouseenter", () => {
-      clearTimeout(zoomCloseTimer);
-      applyZoomBounds();
-      zoomImage.src = image.currentSrc || image.src;
-      zoomViewer.classList.add("open");
-      zoomViewer.setAttribute("aria-hidden", "false");
-    });
-  });
-  zoomFrame.addEventListener("mouseenter", () => clearTimeout(zoomCloseTimer));
-  zoomViewer.addEventListener("mousemove", event => {
-    if (zoomViewer.classList.contains("open") && !zoomFrame.contains(event.target)) {
-      clearTimeout(zoomCloseTimer);
-      zoomCloseTimer = setTimeout(() => {
-        zoomViewer.classList.remove("open");
-        zoomViewer.setAttribute("aria-hidden", "true");
-      }, 110);
-    }
-  });
-  zoomViewer.addEventListener("click", () => {
-    clearTimeout(zoomCloseTimer);
-    zoomViewer.classList.remove("open");
-    zoomViewer.setAttribute("aria-hidden", "true");
-  });
+function applyZoomBounds() {
+  const isCards = document.body.classList.contains("aspect-3x4");
+  zoomViewer.classList.toggle("slide-bound", isCards);
+  if (!isCards) return;
+  const rect = slideEls[index].getBoundingClientRect();
+  zoomViewer.style.setProperty("--zoom-left", `${rect.left}px`);
+  zoomViewer.style.setProperty("--zoom-top", `${rect.top}px`);
+  zoomViewer.style.setProperty("--zoom-width", `${rect.width}px`);
+  zoomViewer.style.setProperty("--zoom-height", `${rect.height}px`);
 }
 ```
 
-## Overview
+## 概览模式
 
-Overview should show one thumbnail button per slide with page number and title. Clicking a thumbnail should close overview and navigate to the slide.
+概览模式应该为每页生成一个缩略按钮，包含页码和标题。点击缩略按钮后关闭概览，并跳到对应页面。
 
-The bundled template should build these buttons from `slides` after rendering:
+参考实现：
 
 ```js
 overview.innerHTML = slides.map((slide, i) => `
   <button class="overview-card" type="button" data-index="${i}">
     <b>${i + 1}</b>
-    <span>${slide.title || slide.headline || `Slide ${i + 1}`}</span>
+    <span>${slide.title || slide.headline || `第 ${i + 1} 页`}</span>
   </button>
 `).join("");
 ```
 
-Each button should call `go(i)` and close overview. Overview must not be an empty overlay.
+概览不能是空遮罩。
 
-## Hash Links
+## Hash 深链
 
-Hash deep links are part of the deck contract. On load, parse `location.hash` values like `#/12` and activate that slide. Also listen for `hashchange` so copied links work during recording and review.
+Hash 深链是模板契约的一部分。加载时解析 `#/12`，并激活对应页面。也要监听 `hashchange`，让复制出来的链接在录屏和 review 时可用。
 
-For `cards`, hash links are useful when reviewing a specific graphic card before exporting images.
+`cards` 模式也需要 hash，因为它方便定位某一张待导出的图文卡片。
 
-## Image Export Consideration
+## 导出图片注意事项
 
-The template is still an HTML slideshow first. If exporting `cards` to PNG later, preserve the same slide DOM and capture one active slide at a time. Do not redesign the `cards` mode as a separate static long page.
+模板仍然首先是 HTML 幻灯片。如果之后把 `cards` 导出为 PNG，应复用同一套 slide DOM，一次截取一张 active slide。不要把 `cards` 另做成长图页面。
 
-## Verification
+## 验证
 
-Browser-check:
+浏览器检查：
 
-- All images have `naturalWidth > 0`.
-- Each slide activates correctly through hash navigation.
-- Both `aspect-16x9` and `aspect-3x4` preserve navigation behavior.
-- Wheel changes slide once per intentional scroll.
-- Hovering an image opens zoom; moving to enlarged edge keeps it open; moving outside enlarged card closes it.
-- In `cards`, opened zoom has `.slide-bound` and its bounding box matches the active 3:4 slide.
+- 所有图片 `naturalWidth > 0`。
+- 每页都能通过 hash 正确激活。
+- `aspect-16x9` 和 `aspect-3x4` 都保留导航能力。
+- 鼠标滚轮每次意图滚动只翻一页。
+- 悬停图片会打开 zoom。
+- 鼠标移动到放大图边缘时保持打开。
+- 鼠标离开放大卡片后关闭。
+- `cards` 模式下，zoom 有 `.slide-bound`，并且边界匹配当前 3:4 页面。
