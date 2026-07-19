@@ -1,0 +1,6 @@
+# 本地开发规划与过程记录，不随公开 Skill 发布
+docs/superpowers/
+plans/
+
+# README 旧封面图文件名，仅本地保留；公开 README 使用 cards-cover-fixed.png
+docs/assets/readme/cards-cover.png
